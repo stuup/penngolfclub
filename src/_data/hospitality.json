@@ -1,0 +1,40 @@
+{
+  "weddingInclusions": [
+    "A unique venue with views over our 18-hole course to the Clee Hills, over 35 miles away",
+    "Free car parking for guests",
+    "Function suite, including wedding reception until midnight",
+    "Glass of Prosecco or champagne on arrival",
+    "Glass of Prosecco or champagne for the toast",
+    "Quality wine selection for tables",
+    "2 or 3 course wedding breakfast",
+    "Evening finger buffet, hot and/or cold",
+    "Table linen cloths",
+    "Cake stand & knife",
+    "Table centre pieces"
+  ],
+  "partyExtras": ["Table chair covers with coloured sashes", "Candy cart", "Post box"],
+  "meetingRoom": {
+    "features": [
+      "Free WiFi",
+      "58\" state-of-the-art TV",
+      "Flipchart, whiteboard, pads & pens",
+      "Seating for 10–20 delegates",
+      "Private bar",
+      "Mineral water",
+      "Full catering available",
+      "Golf course & tuition",
+      "Block booking discounts",
+      "Free parking"
+    ],
+    "packages": [
+      { "name": "Full Day", "price": 20, "includes": "Room hire, arrival/mid-morning and afternoon tea & coffee, full lunch buffet, mineral water, flipchart, pads & pens and use of the private bar.", "extras": "Bacon rolls on arrival and afternoon pastries (prices on request)." },
+      { "name": "Half Day", "price": 10, "includes": "Room hire, arrival/mid-morning tea & coffee, mineral water, flipchart, pads & pens and use of the private bar.", "extras": "Golf, bacon rolls on arrival and afternoon pastries (prices on request)." },
+      { "name": "Breakfast Meeting", "price": 15, "includes": "Room hire, full breakfast, tea & coffee, mineral water, flipchart, pads & pens.", "extras": "Golf." }
+    ],
+    "golf": [
+      { "name": "9 holes", "price": 12 },
+      { "name": "18 holes", "price": 20 }
+    ],
+    "offer": "10% off your first booking"
+  }
+}

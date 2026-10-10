@@ -1,0 +1,11 @@
+<article class="card flex gap-4 p-4">
+  <div class="flex w-14 shrink-0 flex-col items-center justify-center rounded-xl bg-heath-900 py-2 text-white">
+    <span class="text-[11px] font-semibold tracking-wider uppercase opacity-80">{{ e.date | monthShort }}</span>
+    <span class="font-display text-2xl leading-none font-semibold">{{ e.date | dayNum }}</span>
+  </div>
+  <div class="min-w-0">
+    <p class="text-xs font-semibold tracking-wider text-crest-500 uppercase">{{ e.date | weekdayShort }} · {{ e.category }}</p>
+    <h3 class="font-semibold text-heath-900">{{ e.title }}</h3>
+    {%- if e.format %}<p class="truncate text-sm text-heath-700">{{ e.format }}</p>{% endif %}
+  </div>
+</article>

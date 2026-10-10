@@ -1,0 +1,10 @@
+{%- set s = courseStatus.status -%}
+{%- set dot = "bg-emerald-400" if s == "open" else ("bg-amber-400" if s == "restricted" else "bg-red-500") -%}
+<a href="/the-course/status/" class="group inline-flex items-center gap-2 font-medium hover:text-white">
+  <span class="relative flex size-2.5">
+    {%- if s == "open" %}<span class="absolute inline-flex h-full w-full animate-ping rounded-full {{ dot }} opacity-60"></span>{% endif %}
+    <span class="relative inline-flex size-2.5 rounded-full {{ dot }}"></span>
+  </span>
+  <span>{{ courseStatus.headline }}</span>
+  <span class="hidden text-white/50 group-hover:text-white/80 sm:inline">· Course status</span>
+</a>

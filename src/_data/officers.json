@@ -1,0 +1,12 @@
+{
+  "officers": [
+    { "role": "President", "name": "Steve Baugh" },
+    { "role": "Men's Captain", "name": "Mick Mullard" },
+    { "role": "Lady Captain", "name": "Mrs Angela Hughes" },
+    { "role": "Chairman of the Board", "name": "Ian Foster" },
+    { "role": "Honorary Secretary", "name": "Ian Foster" },
+    { "role": "Honorary Treasurer", "name": "Rob Lane" },
+    { "role": "Club Welfare Officer", "name": "Ian Foster", "contact": "01902 341142, Option 3 · secretary@penngolfclub.co.uk" }
+  ],
+  "board": ["Mrs Val Charlton", "Mrs Debbie Cosnett", "Mr Kevin Gelder", "Ms Jo Hall", "Mrs Julie Hinde", "John Holmes", "Mr Phil Jones"]
+}

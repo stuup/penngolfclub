@@ -1,0 +1,52 @@
+---
+layout: layouts/page.njk
+title: Course Status & Weather
+heading: Course status
+intro: Today's course conditions and the five-day forecast for Penn Common.
+hero: /assets/images/penn-3.jpg
+---
+{%- set s = courseStatus %}
+{%- set tone = "emerald" if s.status == "open" else ("amber" if s.status == "restricted" else "red") %}
+<div class="grid gap-6 lg:grid-cols-2">
+  <section class="card p-6" aria-labelledby="status-h">
+    <div class="flex items-center gap-3">
+      <span class="flex size-12 items-center justify-center rounded-full {{ 'bg-emerald-100 text-emerald-700' if tone == 'emerald' else ('bg-amber-100 text-amber-700' if tone == 'amber' else 'bg-red-100 text-red-700') }}">{% icon "flag", "size-6" %}</span>
+      <div>
+        <h2 id="status-h" class="font-display text-2xl font-semibold text-heath-900">{{ s.headline }}</h2>
+        <p class="text-sm text-heath-600">Updated <time datetime="{{ s.updated }}" data-relative>{{ s.updated | dateLong }}</time></p>
+      </div>
+    </div>
+    <p class="mt-5 text-heath-800">{{ s.message }}</p>
+    <p class="mt-4 inline-flex items-center gap-2 rounded-full bg-heath-50 px-3 py-1.5 text-sm text-heath-800">
+      <span class="size-2.5 rounded-full {{ 'bg-emerald-500' if s.buggies == 'green' else ('bg-amber-500' if s.buggies == 'amber' else 'bg-red-500') }}"></span>
+      Buggy status: <strong class="capitalize">{{ s.buggies }}</strong>
+    </p>
+
+    <h3 class="mt-6 text-sm font-semibold tracking-wider text-heath-700 uppercase">Restrictions in place</h3>
+    <ul class="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2">
+      {%- for r in [
+        { k: "preferredLies", code: "PL", label: "Preferred lies" },
+        { k: "fairwayMats", code: "FM", label: "Fairway mats" },
+        { k: "noTrolleys", code: "NT", label: "No trolleys" },
+        { k: "noBuggies", code: "NB", label: "No buggies" },
+        { k: "temporaryGreens", code: "TG", label: "Temporary greens" }
+      ] %}
+      {%- set on = s.restrictions[r.k] %}
+      <li class="flex items-center gap-3 rounded-lg px-3 py-2 {{ 'bg-amber-50 text-amber-900 ring-1 ring-amber-200' if on else 'bg-heath-50/60 text-heath-500' }}">
+        <span class="flex size-8 items-center justify-center rounded-md text-xs font-bold {{ 'bg-amber-500 text-white' if on else 'bg-white text-heath-400 ring-1 ring-heath-950/10' }}">{{ r.code }}</span>
+        <span class="text-sm {{ 'font-semibold' if on }}">{{ r.label }}</span>
+        <span class="sr-only">{{ "— in place" if on else "— not in place" }}</span>
+      </li>
+      {%- endfor %}
+    </ul>
+    <p class="mt-5 text-sm text-heath-600">Conditions can change quickly. If in doubt, call the Golf Shop on <a href="tel:+441902330472" class="link">01902 330472</a>.</p>
+  </section>
+
+  <section class="card p-6" aria-labelledby="wx-h">
+    <h2 id="wx-h" class="font-display text-2xl font-semibold text-heath-900">Weather on the course</h2>
+    <div class="mt-5" data-weather data-lat="{{ site.geo.lat }}" data-lng="{{ site.geo.lng }}" data-days="5" aria-busy="true" aria-live="polite">
+      <div class="h-72 animate-pulse rounded-xl bg-heath-50"></div>
+      <noscript><p>Enable JavaScript to see the live forecast.</p></noscript>
+    </div>
+  </section>
+</div>

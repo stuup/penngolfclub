@@ -1,0 +1,151 @@
+@import "tailwindcss" source("../../");
+@plugin "@tailwindcss/typography";
+
+/* -------------------------------------------------------------------------- */
+/* Design tokens — drawn from the crest (teal), the heathland (deep green,     */
+/* heather, gorse) and the sandy bunkers.                                      */
+/* -------------------------------------------------------------------------- */
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Fraunces", ui-serif, Georgia, "Times New Roman", serif;
+
+  --color-crest-50: #f1f7f7;
+  --color-crest-100: #dceaeb;
+  --color-crest-200: #bcd7d9;
+  --color-crest-300: #94bec1;
+  --color-crest-400: #6b9fa3;
+  --color-crest-500: #548488;
+  --color-crest-600: #446b6f;
+  --color-crest-700: #3a585b;
+  --color-crest-800: #33494c;
+  --color-crest-900: #2d3e41;
+
+  --color-heath-50: #f2f6f4;
+  --color-heath-100: #dfe9e4;
+  --color-heath-200: #bfd3c8;
+  --color-heath-300: #93b4a3;
+  --color-heath-400: #66907b;
+  --color-heath-500: #467361;
+  --color-heath-600: #355b4d;
+  --color-heath-700: #2b4a3f;
+  --color-heath-800: #243c34;
+  --color-heath-900: #1e3a34;
+  --color-heath-950: #0f1f1b;
+
+  --color-gorse-300: #f3d77e;
+  --color-gorse-400: #ecc451;
+  --color-gorse-500: #e4b33b;
+  --color-gorse-600: #c8921f;
+
+  --color-heather-400: #a77fae;
+  --color-heather-500: #8c6494;
+
+  --color-cream: #f8f5ee;
+  --color-sand: #ede5d3;
+
+  --animate-fade-up: fade-up 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: none; }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-cream font-sans text-heath-950 antialiased;
+  }
+  h1, h2, h3, .font-display {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    letter-spacing: -0.01em;
+  }
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-gorse-500;
+  }
+  /* eleventy-img wraps <img> in <picture>; let the <img> keep its place in grid/flex layouts */
+  picture {
+    display: contents;
+  }
+  picture > source {
+    display: none;
+  }
+  [x-cloak], [hidden] {
+    display: none !important;
+  }
+  ::selection {
+    @apply bg-gorse-300 text-heath-950;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+}
+
+/* Reusable component utilities (Tailwind v4 @utility so they can be @applied and variant-prefixed) */
+@utility container-site {
+  @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+}
+@utility eyebrow {
+  @apply text-xs font-semibold tracking-[0.2em] text-crest-500 uppercase;
+}
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-colors duration-200 focus-visible:outline-2;
+}
+@utility btn-primary {
+  @apply btn bg-gorse-500 text-heath-950 hover:bg-gorse-400;
+}
+@utility btn-dark {
+  @apply btn bg-heath-900 text-white hover:bg-heath-700;
+}
+@utility btn-outline {
+  @apply btn border border-heath-900/20 text-heath-900 hover:border-heath-900 hover:bg-heath-900 hover:text-white;
+}
+@utility btn-ghost-light {
+  @apply btn border border-white/40 text-white hover:bg-white hover:text-heath-950;
+}
+@utility card {
+  @apply rounded-2xl bg-white shadow-[0_1px_2px_rgb(15_31_27/0.06),0_8px_24px_-12px_rgb(15_31_27/0.18)] ring-1 ring-heath-950/5;
+}
+@utility link {
+  @apply font-medium text-crest-600 underline decoration-crest-300 underline-offset-4 hover:text-heath-900 hover:decoration-heath-900;
+}
+@utility field-label {
+  @apply mb-1.5 block text-sm font-medium text-heath-900;
+}
+@utility field {
+  @apply block w-full rounded-lg border-0 bg-white px-3.5 py-2.5 text-heath-950 shadow-sm ring-1 ring-heath-950/15 ring-inset placeholder:text-heath-400 focus:ring-2 focus:ring-crest-500 focus:outline-none;
+}
+@utility prose-club {
+  @apply prose prose-lg max-w-none prose-headings:font-display prose-headings:font-semibold prose-headings:text-heath-900 prose-a:text-crest-600 prose-a:decoration-crest-300 prose-a:underline-offset-4 hover:prose-a:text-heath-900 prose-strong:text-heath-900 prose-li:marker:text-crest-400;
+}
+
+
+@layer components {
+  /* Scorecard table */
+  .scorecard th, .scorecard td {
+    @apply px-2 py-2 text-center tabular-nums whitespace-nowrap;
+  }
+  .scorecard thead th {
+    @apply bg-heath-900 text-xs font-semibold tracking-wide text-white uppercase;
+  }
+  .scorecard tbody tr:nth-child(even) {
+    @apply bg-heath-50/60;
+  }
+  .scorecard .subtotal {
+    @apply bg-crest-100 font-semibold;
+  }
+}
+
+@media print {
+  header[role="banner"], footer[role="contentinfo"], .no-print, .status-bar { display: none !important; }
+  body { background: #fff; }
+  .card { box-shadow: none; }
+  /* Scorecard page: print either the course card or the digital card */
+  body[data-print="digital"] .print-static,
+  body:not([data-print="digital"]) .print-digital { display: none !important; }
+  .print-digital input { box-shadow: none !important; border: 0 !important; }
+}

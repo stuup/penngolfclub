@@ -1,0 +1,67 @@
+---
+layout: layouts/page.njk
+title: Contact Us
+heading: Contact & find us
+intro: We'd love to hear from you. Call, email or send a message and the right person will get back to you.
+hero: /assets/images/cluboutside2.jpg
+wide: true
+---
+<div class="grid gap-10 lg:grid-cols-[1fr_400px]">
+  <div>
+    {%- set form = {
+      name: "contact",
+      title: "Send us a message",
+      submit: "Send message",
+      extra: [
+        { name: "subject", label: "What's it about?", type: "select", required: true, wide: true, options: ["General enquiry", "Membership", "Visitor green fees", "Societies", "Weddings & functions", "Meeting room", "Sponsorship", "Feedback"] },
+        { name: "message", label: "Your message", type: "textarea", required: true }
+      ]
+    } %}
+    {% include "partials/enquiry-form.njk" %}
+  </div>
+
+  <aside class="space-y-4">
+    <div class="card p-6">
+      <h2 class="font-display text-xl font-semibold text-heath-900">Penn Golf Club</h2>
+      <address class="mt-3 space-y-2 not-italic text-heath-800">
+        <p class="flex gap-3">{% icon "pin", "size-5 text-crest-500" %}<span>Penn Common, Penn<br>Wolverhampton, {{ site.address.postcode }}</span></p>
+        <p><a href="{{ site.phone | telHref }}" class="flex gap-3 hover:text-crest-600">{% icon "phone", "size-5 text-crest-500" %}{{ site.phone }}</a></p>
+        <p><a href="mailto:{{ site.email }}" class="flex gap-3 hover:text-crest-600">{% icon "mail", "size-5 text-crest-500" %}{{ site.email }}</a></p>
+      </address>
+    </div>
+    {%- for d in site.departments %}
+    <div class="rounded-2xl bg-white p-5 ring-1 ring-heath-950/10">
+      <p class="font-semibold text-heath-900">{{ d.name }}</p>
+      <p class="text-sm text-heath-600">{{ d.detail }}</p>
+      <p class="mt-2 text-sm"><a href="{{ d.phone | telHref }}" class="link">{{ d.phone }}</a> <span class="text-heath-600">{{ d.ext }}</span></p>
+      {%- if d.email %}<p class="text-sm"><a href="mailto:{{ d.email }}" class="link">{{ d.email }}</a></p>{% endif %}
+    </div>
+    {%- endfor %}
+  </aside>
+</div>
+
+<section id="find-us" class="mt-16 scroll-mt-32" aria-labelledby="find-h">
+  <h2 id="find-h" class="font-display text-3xl font-semibold text-heath-900">How to find us</h2>
+  <div class="mt-6 grid gap-6 lg:grid-cols-[1fr_360px]">
+    <div class="card overflow-hidden">
+      <iframe title="Map showing the location of Penn Golf Club" class="h-[420px] w-full" loading="lazy"
+        src="https://www.openstreetmap.org/export/embed.html?bbox={{ site.geo.lng - 0.02 }}%2C{{ site.geo.lat - 0.01 }}%2C{{ site.geo.lng + 0.02 }}%2C{{ site.geo.lat + 0.01 }}&amp;layer=mapnik&amp;marker={{ site.geo.lat }}%2C{{ site.geo.lng }}"></iframe>
+    </div>
+    <div class="space-y-4">
+      <div class="card p-6">
+        <p class="flex items-center gap-2 font-semibold text-heath-900">{% icon "car", "size-5 text-crest-500" %} By car</p>
+        <p class="mt-2 text-heath-700">We're on Penn Common, just south of Wolverhampton on the edge of South Staffordshire, off {{ site.address.lane }}. For sat nav, use <strong>{{ site.address.postcode }}</strong>.</p>
+        <p class="mt-2 text-heath-700">Free car parking is available for visitors and guests.</p>
+      </div>
+      <a href="{{ site.links.directions }}" class="btn-dark w-full" rel="noopener">{% icon "pin", "size-4" %} Get directions</a>
+      <a href="{{ site.links.googleMaps }}" class="btn-outline w-full" rel="noopener">Open in Google Maps</a>
+    </div>
+  </div>
+</section>
+
+<script type="module">
+  // Pre-select the subject from ?subject=… links (e.g. "Become a sponsor")
+  const s = new URLSearchParams(location.search).get("subject");
+  const sel = document.getElementById("contact-subject");
+  if (s && sel) [...sel.options].forEach((o) => { if (o.text.toLowerCase().startsWith(s.toLowerCase())) sel.value = o.text; });
+</script>

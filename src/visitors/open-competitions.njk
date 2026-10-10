@@ -1,0 +1,28 @@
+---
+layout: layouts/page.njk
+title: Open Competitions
+intro: Ladies, men's and seniors opens on our heathland course — book online through BRS Golf.
+hero: /assets/images/penn-1.jpg
+---
+{%- set next = events.events | upcoming %}
+{%- set prev = events.events | past %}
+
+{%- if next.length %}
+<h2 class="font-display text-3xl font-semibold text-heath-900">Open competitions now available to book</h2>
+<div class="mt-6 space-y-4">{% for e in next %}{% include "partials/open-card.njk" %}{% endfor %}</div>
+{%- else %}
+<div class="card p-6 sm:p-8">
+  <p class="eyebrow">Next season</p>
+  <h2 class="mt-2 font-display text-3xl font-semibold text-heath-900">Next season's open dates are coming soon</h2>
+  <p class="mt-3 text-heath-700">Our {{ prev[0].date | yearOf }} open season has finished — thank you to everyone who played. Subscribe to our newsletter at the foot of this page to be the first to hear when next season's dates are released.</p>
+  <div class="mt-5 flex flex-wrap gap-3">
+    <a href="/visitors/open-results/" class="btn-dark">See the results</a>
+    <a href="{{ site.links.bookOpens }}" class="btn-outline" rel="noopener">View on BRS Golf {% icon "external", "size-4" %}</a>
+  </div>
+</div>
+{%- endif %}
+
+{%- if prev.length %}
+<h2 class="mt-14 font-display text-2xl font-semibold text-heath-900">This season's opens</h2>
+<div class="mt-6 space-y-4">{% for e in prev | reverse %}{% include "partials/open-card.njk" %}{% endfor %}</div>
+{%- endif %}

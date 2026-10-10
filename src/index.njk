@@ -1,0 +1,218 @@
+---
+layout: layouts/base.njk
+description: Penn Golf Club — a traditional heathland course on Penn Common, Wolverhampton, with views over the Clee Hills. Book a tee time, bring your society or join a friendly club of 600 members.
+---
+{%- set white = scorecard.tees[0] -%}
+{%- set weekly = (membership.adult[0].price / 52) -%}
+
+{# ------------------------------------------------------------------ Hero #}
+<section class="relative isolate overflow-hidden bg-heath-950">
+  <img src="/assets/images/pgc1.jpg" alt="" class="absolute inset-0 -z-10 h-full w-full object-cover" sizes="100vw" loading="eager" fetchpriority="high">
+  <div class="absolute inset-0 -z-10 bg-gradient-to-r from-heath-950/90 via-heath-950/55 to-heath-950/10"></div>
+  <div class="absolute inset-x-0 bottom-0 -z-10 h-40 bg-gradient-to-t from-heath-950/70 to-transparent"></div>
+
+  <div class="container-site grid gap-10 pt-20 pb-16 sm:pt-28 lg:grid-cols-[1fr_380px] lg:items-end lg:pt-36 lg:pb-24">
+    <div class="max-w-2xl">
+      <p class="eyebrow animate-fade-up !text-gorse-400">Heathland golf since the 1890s</p>
+      <h1 class="mt-4 animate-fade-up text-5xl leading-[1.02] font-semibold text-white [animation-delay:80ms] sm:text-6xl lg:text-7xl">Where city meets countryside</h1>
+      <p class="mt-6 max-w-xl animate-fade-up text-lg text-white/85 [animation-delay:160ms] sm:text-xl">
+        One of the hidden gems of the Midlands. A mature heathland course on Penn Common, framed by gorse and heather, with views across to the Clee Hills.
+      </p>
+      <div class="mt-9 flex animate-fade-up flex-wrap gap-3 [animation-delay:240ms]">
+        <a href="{{ site.links.bookTeeTime }}" class="btn-primary px-6 py-3 text-base" rel="noopener">{% icon "flag", "size-5" %} Book a tee time</a>
+        <a href="/membership/" class="btn-ghost-light px-6 py-3 text-base">Become a member</a>
+      </div>
+    </div>
+
+    {# Conditions card #}
+    <aside class="card animate-fade-up p-6 [animation-delay:320ms]" aria-labelledby="conditions-title">
+      <div class="flex items-start justify-between gap-4">
+        <div>
+          <p id="conditions-title" class="eyebrow">Today at Penn</p>
+          <p class="mt-1 font-display text-xl font-semibold text-heath-900">{{ courseStatus.headline }}</p>
+        </div>
+        <span class="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold {{ 'bg-emerald-100 text-emerald-800' if courseStatus.status == 'open' else ('bg-amber-100 text-amber-800' if courseStatus.status == 'restricted' else 'bg-red-100 text-red-800') }}">
+          <span class="size-1.5 rounded-full bg-current"></span>{{ courseStatus.status | capitalize }}
+        </span>
+      </div>
+      <div class="mt-5 border-t border-heath-950/10 pt-5" data-weather data-compact data-lat="{{ site.geo.lat }}" data-lng="{{ site.geo.lng }}" data-days="1" aria-busy="true" aria-live="polite">
+        <div class="h-36 animate-pulse rounded-xl bg-heath-50"></div>
+        <noscript><p class="text-sm text-heath-700">Call the Golf Shop on 01902 330472 for today's conditions.</p></noscript>
+      </div>
+      <a href="/the-course/status/" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-crest-600 hover:text-heath-900">5-day forecast & course status {% icon "arrowRight", "size-4" %}</a>
+    </aside>
+  </div>
+</section>
+
+{# ------------------------------------------------------------------ Announcement #}
+<div class="bg-gorse-500 text-heath-950">
+  <div class="container-site flex items-center justify-center gap-3 py-3 text-center text-sm font-semibold sm:text-[15px]">
+    {% icon "trophy", "size-5 hidden sm:block" %}
+    <p>Home venue for Staffordshire U14s, U16s &amp; U18s Junior Boys</p>
+  </div>
+</div>
+
+{# ------------------------------------------------------------------ Intro + stats #}
+<section class="container-site grid gap-14 py-20 lg:grid-cols-2 lg:items-center lg:py-28">
+  <div>
+    <p class="eyebrow">Welcome to Penn</p>
+    <h2 class="mt-3 text-4xl font-semibold text-heath-900 sm:text-5xl">A traditional club you'll be pleased you found</h2>
+    <div class="prose-club mt-6 text-heath-800">
+      <p>Bordered by the industrial Black Country and the rural countryside of South Staffordshire, Penn Golf Club sits within Penn Common. The land, acquired from the Duke of Sutherland, has matured over a century into one of the most impressive courses in the area.</p>
+      <p>With excellent greens all year round and well-manicured fairways, the layout uses the natural grasses and gorse to great effect. Penn will delight anyone with an eye for an aesthetically pleasing round of golf.</p>
+    </div>
+    <dl class="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-2xl bg-heath-950/10 ring-1 ring-heath-950/10 sm:grid-cols-4">
+      {%- for stat in [
+        { v: "Par " + white.par, l: "18 holes" },
+        { v: white.yards | sum | number, l: "Yards from the whites" },
+        { v: white.slope, l: "Slope rating" },
+        { v: site.memberCount, l: "Friendly members" }
+      ] %}
+      <div class="bg-cream p-5">
+        <dt class="text-xs text-heath-600">{{ stat.l }}</dt>
+        <dd class="mt-1 font-display text-3xl font-semibold text-heath-900">{{ stat.v }}</dd>
+      </div>
+      {%- endfor %}
+    </dl>
+  </div>
+  <div class="relative">
+    <img src="/assets/images/spencer-11.jpg" alt="Heather in bloom beside a fairway at Penn Golf Club" class="aspect-[4/5] w-full rounded-3xl object-cover shadow-2xl" sizes="(min-width: 1024px) 50vw, 100vw">
+    <img src="/assets/images/penn.jpg" alt="Aerial view over the course towards the Clee Hills" class="absolute -bottom-10 -left-6 hidden aspect-[4/3] w-1/2 rounded-2xl border-8 border-cream object-cover shadow-xl sm:block" sizes="25vw">
+    <img src="/assets/brand/penn-golf-club-crest-badge.svg" alt="" class="absolute -top-8 -right-4 size-28 drop-shadow-xl sm:size-32" eleventy:ignore>
+  </div>
+</section>
+
+{# ------------------------------------------------------------------ Pathways #}
+<section class="bg-heath-900 py-20 text-white lg:py-24">
+  <div class="container-site">
+    <div class="max-w-2xl">
+      <p class="eyebrow !text-gorse-400">Plan your visit</p>
+      <h2 class="mt-3 text-4xl font-semibold sm:text-5xl">However you play, there's a place for you</h2>
+    </div>
+    <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {%- for card in [
+        { title: "Visitors", text: "Play one of the Midlands' finest heathland courses. Green fees from " + (greenFees.rates[0].price | money) + ".", url: "/visitors/", img: "/assets/images/spencer-12.jpg", cta: "Green fees & booking" },
+        { title: "Societies", text: "Golf and dining packages for groups of 12 or more, from " + (societies.packages[0].weekday | money2) + " per player.", url: "/visitors/societies/", img: "/assets/images/penn-4.jpg", cta: "Society packages" },
+        { title: "Membership", text: "Seven-day golf for " + (weekly | money2) + " a week, with offers for juniors, young adults and ladies.", url: "/membership/", img: "/assets/images/penn-ladies.jpg", cta: "How to join" },
+        { title: "Hospitality", text: "Weddings, parties, meetings and great home-cooked food, with views to the Clee Hills.", url: "/hospitality/", img: "/assets/images/penn-clubhouse-2.jpg", cta: "Functions & dining" }
+      ] %}
+      <a href="{{ card.url }}" class="group relative flex flex-col overflow-hidden rounded-2xl bg-heath-800 ring-1 ring-white/10 transition hover:-translate-y-1 hover:ring-gorse-400/60">
+        <img src="{{ card.img }}" alt="" class="aspect-[4/3] w-full object-cover transition duration-500 group-hover:scale-105" sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw">
+        <div class="flex flex-1 flex-col p-6">
+          <h3 class="text-2xl font-semibold">{{ card.title }}</h3>
+          <p class="mt-2 flex-1 text-white/75">{{ card.text }}</p>
+          <span class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-gorse-400">{{ card.cta }} {% icon "arrowRight", "size-4 transition-transform group-hover:translate-x-1" %}</span>
+        </div>
+      </a>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+{# ------------------------------------------------------------------ The course tools #}
+<section class="container-site py-20 lg:py-28">
+  <div class="grid gap-12 lg:grid-cols-12 lg:items-center">
+    <div class="lg:col-span-5">
+      <p class="eyebrow">The course</p>
+      <h2 class="mt-3 text-4xl font-semibold text-heath-900 sm:text-5xl">Know the course before you tee off</h2>
+      <p class="mt-5 text-lg text-heath-800">At {{ white.yards | sum | number }} yards from the whites, Penn rewards accuracy over length. Gorse and heather line the fairways, and the 455-yard 8th is the stroke index 1.</p>
+      <ul class="mt-8 space-y-4">
+        {%- for tool in [
+          { icon: "table", title: "Interactive scorecard", text: "Choose your tees, enter your Handicap Index and keep score with live Stableford points.", url: "/the-course/scorecard/" },
+          { icon: "calculator", title: "Course Handicap calculator", text: "Instant Course and Playing Handicaps for every set of tees.", url: "/the-course/course-handicap/" },
+          { icon: "flag", title: "Hole-by-hole guide", text: "Yardages, pars and stroke indexes for all 18 holes.", url: "/the-course/" }
+        ] %}
+        <li>
+          <a href="{{ tool.url }}" class="group flex gap-4 rounded-2xl p-4 transition hover:bg-white hover:shadow-lg">
+            <span class="flex size-12 shrink-0 items-center justify-center rounded-xl bg-crest-100 text-crest-600">{% icon tool.icon, "size-6" %}</span>
+            <span>
+              <span class="flex items-center gap-2 font-semibold text-heath-900">{{ tool.title }} {% icon "arrowRight", "size-4 opacity-0 transition group-hover:translate-x-1 group-hover:opacity-100" %}</span>
+              <span class="mt-1 block text-heath-700">{{ tool.text }}</span>
+            </span>
+          </a>
+        </li>
+        {%- endfor %}
+      </ul>
+    </div>
+    <div class="grid grid-cols-3 gap-4 lg:col-span-7">
+      <img src="/assets/images/spencer-21.jpg" alt="Deep greenside bunker guarding a green" class="col-span-2 row-span-2 aspect-square h-full w-full rounded-2xl object-cover" sizes="(min-width: 1024px) 40vw, 66vw">
+      <img src="/assets/images/spencer-6.jpg" alt="Heather and gorse on the heathland" class="aspect-square h-full w-full rounded-2xl object-cover" sizes="20vw">
+      <img src="/assets/images/spencer-22.jpg" alt="View down a tree-lined fairway" class="aspect-square h-full w-full rounded-2xl object-cover" sizes="20vw">
+      <img src="/assets/images/penn-5.jpg" alt="Pine trees beside the fairway" class="col-span-3 aspect-[3/1] w-full rounded-2xl object-cover" sizes="(min-width: 1024px) 58vw, 100vw">
+    </div>
+  </div>
+</section>
+
+{# ------------------------------------------------------------------ History #}
+<section class="relative isolate overflow-hidden bg-heath-950 py-20 text-white lg:py-28">
+  <img src="/assets/images/hickory-clubs-2.jpg" alt="" class="absolute inset-0 -z-10 h-full w-full object-cover opacity-25" sizes="100vw">
+  <div class="container-site grid gap-12 lg:grid-cols-2 lg:items-center">
+    <div>
+      <p class="eyebrow !text-gorse-400">Our history</p>
+      <h2 class="mt-3 text-4xl font-semibold sm:text-5xl">From the Barley Mow Inn to the Walker Cup</h2>
+      <p class="mt-6 text-lg text-white/80">Golf has been played on Penn Common since the early 1890s, making it arguably the oldest course in the Wolverhampton area. Two of English golf's most colourful characters cut their first divots here: Archie Compston, Open runner-up and tutor to the Prince of Wales, and Charlie Stowe, the Black Country miner who helped GB&amp;I win the 1938 Walker Cup.</p>
+      <a href="/the-club/history/" class="btn-ghost-light mt-8">Read our story {% icon "arrowRight", "size-4" %}</a>
+    </div>
+    <figure class="grid grid-cols-2 gap-4">
+      <img src="/assets/images/penn-c-stowe-.jpg" alt="Charlie Stowe (left) in his playing days" class="aspect-[4/5] w-full rounded-2xl object-cover grayscale" sizes="25vw">
+      <img src="/assets/images/compston-penn.jpg" alt="Archie Compston (left) with Walter Hagen" class="mt-10 aspect-[4/5] w-full rounded-2xl object-cover grayscale" sizes="25vw">
+    </figure>
+  </div>
+</section>
+
+{# ------------------------------------------------------------------ News + diary #}
+<section class="container-site grid gap-14 py-20 lg:grid-cols-3 lg:py-28">
+  <div class="lg:col-span-2">
+    <div class="flex items-end justify-between gap-4">
+      <div>
+        <p class="eyebrow">Club news</p>
+        <h2 class="mt-3 text-4xl font-semibold text-heath-900">Latest from Penn</h2>
+      </div>
+      <a href="/news/" class="link hidden text-sm sm:inline">All news</a>
+    </div>
+    <div class="mt-8 grid gap-6 sm:grid-cols-2">
+      {%- for post in collections.news | slice(0, 2) %}
+      {% include "partials/news-card.njk" %}
+      {%- endfor %}
+    </div>
+  </div>
+  <div>
+    <p class="eyebrow">Diary</p>
+    <h2 class="mt-3 text-4xl font-semibold text-heath-900">Coming up</h2>
+    {%- set next = events.events | upcoming %}
+    <ul class="mt-8 space-y-3">
+      {%- for e in next | slice(0, 3) %}
+      <li>{% include "partials/event-row.njk" %}</li>
+      {%- else %}
+      {%- for r in events.regular %}
+      <li class="card flex gap-4 p-4">
+        <span class="flex size-12 shrink-0 items-center justify-center rounded-xl bg-crest-100 text-crest-600">{% icon "calendar", "size-6" %}</span>
+        <span><span class="block font-semibold text-heath-900">{{ r.title }}</span><span class="text-sm text-heath-700">{{ r.when }} · {{ r.detail }}</span></span>
+      </li>
+      {%- endfor %}
+      {%- endfor %}
+    </ul>
+    <a href="/diary/" class="btn-outline mt-6">View the diary</a>
+  </div>
+</section>
+
+{# ------------------------------------------------------------------ Reviews + sponsors #}
+<section class="container-site">
+  <div class="grid gap-6 lg:grid-cols-2">
+    <div class="rounded-3xl bg-crest-100 p-8 sm:p-10">
+      {% icon "star", "size-8 text-crest-600" %}
+      <h2 class="mt-4 text-3xl font-semibold text-heath-900">Played Penn recently?</h2>
+      <p class="mt-3 text-heath-800">We take our reviews very seriously. Feedback from members and visitors is our most valuable tool for keeping standards high and improving the experience we offer.</p>
+      <a href="{{ site.links.googleMaps }}" class="btn-dark mt-6" rel="noopener">Leave us a review {% icon "external", "size-4" %}</a>
+    </div>
+    <div class="rounded-3xl bg-sand p-8 sm:p-10">
+      {% icon "heart", "size-8 text-heather-500" %}
+      <h2 class="mt-4 text-3xl font-semibold text-heath-900">Thank you to our sponsors</h2>
+      <p class="mt-3 text-heath-800">{{ sponsors.names | slice(0, 8) | join(" · ") }} and many more local businesses support our club.</p>
+      <div class="mt-6 flex flex-wrap gap-3">
+        <a href="/the-club/sponsors/" class="btn-outline">Meet our sponsors</a>
+        <a href="/contact/?subject=Sponsorship" class="btn-outline">Become a sponsor</a>
+      </div>
+    </div>
+  </div>
+</section>

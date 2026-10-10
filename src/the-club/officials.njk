@@ -1,0 +1,26 @@
+---
+layout: layouts/page.njk
+title: Club Officials
+intro: The officers and Board of Directors of Penn Golf Club Limited.
+hero: /assets/images/penn-ladies.jpg
+heroPosition: center 30%
+---
+<ul class="grid gap-4 sm:grid-cols-2">
+  {%- for o in officers.officers %}
+  <li class="card p-5">
+    <p class="eyebrow">{{ o.role }}</p>
+    <p class="mt-1 font-display text-xl font-semibold text-heath-900">{{ o.name }}</p>
+    {%- if o.contact %}<p class="mt-1 text-sm text-heath-700">{{ o.contact }}</p>{% endif %}
+  </li>
+  {%- endfor %}
+</ul>
+
+<h2 class="mt-12 font-display text-2xl font-semibold text-heath-900">Other Board members</h2>
+<ul class="mt-4 flex flex-wrap gap-2">
+  {%- for b in officers.board %}<li class="rounded-full bg-white px-4 py-2 text-heath-800 ring-1 ring-heath-950/10">{{ b }}</li>{% endfor %}
+</ul>
+
+<div class="mt-12 rounded-2xl bg-crest-50 p-6 ring-1 ring-crest-200">
+  <p class="font-semibold text-heath-900">Contact the Secretary</p>
+  <p class="mt-1 text-heath-700">Tel <a class="link" href="tel:+441902341142">01902 341142</a>, Option 3 · <a class="link" href="mailto:secretary@penngolfclub.co.uk">secretary@penngolfclub.co.uk</a></p>
+</div>

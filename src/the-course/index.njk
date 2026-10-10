@@ -1,0 +1,74 @@
+---
+layout: layouts/page.njk
+title: Course Guide
+heading: The Course
+intro: A mature heathland layout where natural grasses, gorse and heather do the defending. Accuracy beats length at Penn.
+hero: /assets/images/spencer-6.jpg
+wide: true
+---
+{%- set white = scorecard.tees[0] %}{% set yellow = scorecard.tees[1] %}{% set red = scorecard.tees[2] %}
+
+{# Tee summary #}
+<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+  {%- for t in scorecard.tees %}
+  <div class="card p-5">
+    <p class="flex items-center gap-2 text-sm font-semibold text-heath-800"><span class="size-3.5 rounded-full ring-1 ring-heath-950/20" style="background:{{ t.colour }}"></span>{{ t.name }} tees · {{ t.label }}</p>
+    <p class="mt-3 font-display text-4xl font-semibold text-heath-900">{{ t.yards | sum | number }}<span class="ml-1 text-base font-normal text-heath-600">yards</span></p>
+    <dl class="mt-3 flex gap-5 text-sm text-heath-700">
+      <div><dt class="inline">Par</dt> <dd class="inline font-semibold text-heath-900">{{ t.par }}</dd></div>
+      <div><dt class="inline">CR</dt> <dd class="inline font-semibold text-heath-900">{{ t.rating }}</dd></div>
+      <div><dt class="inline">Slope</dt> <dd class="inline font-semibold text-heath-900">{{ t.slope }}</dd></div>
+    </dl>
+  </div>
+  {%- endfor %}
+</div>
+
+<div class="mt-8 flex flex-wrap gap-3">
+  <a href="/the-course/scorecard/" class="btn-dark">{% icon "table", "size-4" %} Interactive scorecard</a>
+  <a href="/the-course/course-handicap/" class="btn-outline">{% icon "calculator", "size-4" %} Course Handicap calculator</a>
+  <a href="/the-course/status/" class="btn-outline">{% icon "sun", "size-4" %} Status & weather</a>
+</div>
+
+{# Hole by hole #}
+{%- set maxYards = 560 %}
+{%- for nine in [{ name: "The Front Nine", start: 0 }, { name: "The Back Nine", start: 9 }] %}
+<section class="mt-16">
+  <div class="flex items-end justify-between gap-4 border-b border-heath-950/10 pb-4">
+    <h2 class="font-display text-3xl font-semibold text-heath-900">{{ nine.name }}</h2>
+    <p class="text-sm text-heath-600">
+      {%- set nineYards = white.yards | slice(nine.start, nine.start + 9) | sum %}{%- set ninePar = white.pars | slice(nine.start, nine.start + 9) | sum %}
+      {{ nineYards | number }} yds · Par {{ ninePar }} (white)
+    </p>
+  </div>
+  <ol class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    {%- for i in range(nine.start, nine.start + 9) %}
+    {%- set hole = holes.holes[i] %}
+    <li id="hole-{{ i + 1 }}" class="card scroll-mt-32 p-5">
+      <div class="flex items-start justify-between">
+        <div class="flex items-center gap-3">
+          <span class="flex size-12 items-center justify-center rounded-full bg-heath-900 font-display text-xl font-semibold text-white">{{ i + 1 }}</span>
+          <div>
+            <p class="font-display text-lg font-semibold text-heath-900">{{ hole.name or ("Hole " + (i + 1)) }}</p>
+            <p class="text-sm text-heath-600">Par {{ white.pars[i] }} · SI {{ white.si[i] }}{% if red.pars[i] != white.pars[i] %} · Ladies par {{ red.pars[i] }}{% endif %}</p>
+          </div>
+        </div>
+        {%- if white.si[i] <= 3 %}<span class="rounded-full bg-gorse-300/60 px-2 py-0.5 text-[11px] font-semibold text-heath-900">Tough</span>{% endif %}
+      </div>
+      <ul class="mt-4 space-y-2" aria-label="Yardages">
+        {%- for t in [white, yellow, red] %}
+        <li class="flex items-center gap-3 text-sm">
+          <span class="w-14 text-heath-700">{{ t.name }}</span>
+          <span class="h-2 flex-1 overflow-hidden rounded-full bg-heath-100"><span class="block h-full rounded-full {{ 'bg-heath-300' if t.id == 'white' else ('bg-gorse-500' if t.id == 'yellow' else 'bg-red-500') }}" style="width: {{ (t.yards[i] / maxYards * 100) | round(1) }}%"></span></span>
+          <span class="w-14 text-right font-semibold text-heath-900 tabular-nums">{{ t.yards[i] }}</span>
+        </li>
+        {%- endfor %}
+      </ul>
+      {%- if hole.description %}<p class="mt-4 text-sm text-heath-700">{{ hole.description }}</p>{% endif %}
+    </li>
+    {%- endfor %}
+  </ol>
+</section>
+{%- endfor %}
+
+{% set cta = { title: "Come and play the heathland", text: "Green fees from £" + greenFees.rates[0].price + ". Book online or call the Golf Shop on 01902 330472." } %}
+{% include "partials/cta-band.njk" %}

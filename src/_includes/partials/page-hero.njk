@@ -1,0 +1,23 @@
+{%- set heroImage = hero or "/assets/images/pgc1.jpg" -%}
+<section class="relative isolate overflow-hidden bg-heath-950">
+  <img src="{{ heroImage }}" alt="" class="absolute inset-0 -z-10 h-full w-full object-cover opacity-50" sizes="100vw" loading="eager" fetchpriority="high" style="object-position: {{ heroPosition or 'center' }}">
+  <div class="absolute inset-0 -z-10 bg-gradient-to-t from-heath-950 via-heath-950/50 to-heath-950/20"></div>
+  <div class="container-site py-16 sm:py-20 lg:py-24">
+    {%- if section or eyebrow %}
+    <nav aria-label="Breadcrumb" class="text-sm text-white/70">
+      <ol class="flex flex-wrap items-center gap-2">
+        <li><a href="/" class="hover:text-white">Home</a></li>
+        {%- if section and section.url != page.url %}<li aria-hidden="true">/</li><li><a href="{{ section.url }}" class="hover:text-white">{{ section.title }}</a></li>{% endif %}
+        <li aria-hidden="true">/</li><li aria-current="page" class="text-white">{{ title }}</li>
+      </ol>
+    </nav>
+    {%- endif %}
+    <h1 class="mt-4 max-w-3xl animate-fade-up text-4xl font-semibold text-white sm:text-5xl lg:text-6xl">{{ heading or title }}</h1>
+    {%- if intro %}<p class="mt-5 max-w-2xl animate-fade-up text-lg text-white/85 [animation-delay:120ms] sm:text-xl">{{ intro }}</p>{% endif %}
+    {%- if heroCtas %}
+    <div class="mt-8 flex flex-wrap gap-3">
+      {%- for c in heroCtas %}<a href="{{ c.url }}" class="{{ 'btn-primary' if loop.first else 'btn-ghost-light' }}">{{ c.label }}</a>{% endfor %}
+    </div>
+    {%- endif %}
+  </div>
+</section>

@@ -1,0 +1,22 @@
+---
+layout: layouts/page.njk
+title: Women in Golf Charter
+intro: Penn GC is proud to have signed The R&A's Women in Golf Charter.
+hero: /assets/images/ladies-golf.jpg
+---
+<div class="grid gap-8 md:grid-cols-[1fr_260px] md:items-start">
+  <div class="prose-club">
+    <p>We call on everyone involved in golf to play their part in developing a culture that values women's involvement in every aspect of the sport, from playing to pursuing a career.</p>
+    <ul>
+      <li>Our aim is to increase the number of women and girls playing and working in golf.</li>
+      <li>To achieve this and enable women to flourish throughout golf, we recognise the need for a fundamental shift in culture. There is a clear ethical need for change, and the potential economic benefits of growing the sport through more women and girls playing are substantial.</li>
+      <li>The R&amp;A commits to playing a leading role in this process and to working with affiliates, partners and the wider golf industry towards this goal.</li>
+      <li>In signing this Charter, Penn GC commits to making tangible efforts to develop a welcoming and inspiring environment for women. We will do more to attract women into golf, to help them stay, and to support rewarding careers.</li>
+    </ul>
+  </div>
+  <img src="/assets/images/women-in-golf.jpg" alt="Women in Golf Charter — #FOREeveryone" class="w-full rounded-2xl" sizes="260px">
+</div>
+<div class="mt-8 grid gap-4 sm:grid-cols-2">
+  {%- set doc = documents.womenInGolf %}{% include "partials/doc-link.njk" %}
+  <a href="/membership/prices/" class="card flex items-center gap-4 p-4 font-semibold text-heath-900 hover:text-crest-600"><span class="flex size-11 items-center justify-center rounded-lg bg-heather-400/20 text-heather-500">{% icon "star", "size-5" %}</span>Ladies' two-for-one membership offer</a>
+</div>

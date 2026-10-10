@@ -1,0 +1,72 @@
+{%- set pageTitle = (title + " | " + site.name) if title and page.url != "/" else (site.name + " — Heathland golf in Wolverhampton since 1908") -%}
+{%- set pageDescription = description or site.description -%}
+{%- set ogImage = (ogImage or "/assets/images/penn.jpg") | absoluteUrl(site.url) -%}
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ pageTitle }}</title>
+  <meta name="description" content="{{ pageDescription }}">
+  <link rel="canonical" href="{{ page.url | absoluteUrl(site.url) }}">
+  <meta name="theme-color" content="#1e3a34">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{ site.name }}">
+  <meta property="og:title" content="{{ title or site.name }}">
+  <meta property="og:description" content="{{ pageDescription }}">
+  <meta property="og:url" content="{{ page.url | absoluteUrl(site.url) }}">
+  <meta property="og:image" content="{{ ogImage }}">
+  <meta property="og:locale" content="en_GB">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="alternate" type="application/atom+xml" title="Penn Golf Club News" href="/news/feed.xml">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=Inter:wght@400..700&display=swap">
+  <link rel="stylesheet" href="/assets/css/main.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": ["GolfCourse", "SportsClub"],
+    "name": "{{ site.name }}",
+    "url": "{{ site.url }}",
+    "logo": "{{ '/assets/brand/penn-golf-club-crest.png' | absoluteUrl(site.url) }}",
+    "image": "{{ '/assets/images/penn.jpg' | absoluteUrl(site.url) }}",
+    "description": "{{ site.description }}",
+    "telephone": "+44 1902 341142",
+    "email": "{{ site.email }}",
+    "foundingDate": "{{ site.founded }}",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "{{ site.address.street }}, {{ site.address.locality }}",
+      "addressLocality": "{{ site.address.town }}",
+      "postalCode": "{{ site.address.postcode }}",
+      "addressCountry": "GB"
+    },
+    "geo": { "@type": "GeoCoordinates", "latitude": {{ site.geo.lat }}, "longitude": {{ site.geo.lng }} },
+    "hasMap": "{{ site.links.googleMaps }}"
+  }
+  </script>
+  {%- block head %}{% endblock %}
+</head>
+<body class="flex min-h-screen flex-col">
+  <a href="#main" class="sr-only z-[100] rounded-md bg-gorse-500 px-4 py-2 font-semibold text-heath-950 focus:not-sr-only focus:fixed focus:top-3 focus:left-3">Skip to content</a>
+
+  {% include "partials/header.njk" %}
+
+  <main id="main" class="flex-1">
+    {{ content | safe }}
+  </main>
+
+  {% include "partials/footer.njk" %}
+
+  <script src="/assets/js/site.js" type="module"></script>
+  {%- block scripts %}{% endblock %}
+</body>
+</html>

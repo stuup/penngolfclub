@@ -1,0 +1,42 @@
+{
+  "season": "1st April 2026 – 31st October 2026",
+  "packages": [
+    { "name": "Starter", "includes": "Bacon sandwich with tea or coffee & 18 holes of golf", "weekday": 51.75, "sunday": 56.75 },
+    { "name": "Bronze", "includes": "Full English breakfast with tea or coffee & 18 holes of golf", "weekday": 55.5, "sunday": 60.5 },
+    { "name": "Silver", "includes": "Bacon sandwich with tea or coffee, 18 holes of golf & a main meal", "weekday": 66.25, "sunday": 71.25 },
+    { "name": "Gold", "includes": "Bacon sandwich with tea or coffee, 18 holes of golf & a 2 course meal", "weekday": 71.75, "sunday": 76.75, "featured": true },
+    { "name": "Platinum", "includes": "Bacon sandwich with tea or coffee, 18 holes of golf & a 3 course meal", "weekday": 75.75, "sunday": 80.75 }
+  ],
+  "lunchFrom": 9,
+  "terms": [
+    "Packages are available on certain weekend dates and times — please call for details.",
+    "We can help organise competitions such as longest drive and nearest the pin.",
+    "A deposit is required when booking. Please call 7 days before your golf day to confirm numbers.",
+    "If guests do not turn up on the day, 100% of their food cost will be charged.",
+    "If numbers fall below 12, the daily green fee rate will apply."
+  ],
+  "catering": {
+    "minimum": 12,
+    "arrival": [
+      { "item": "Morning coffee & biscuits", "price": 3.5 },
+      { "item": "Bacon or sausage bap & coffee", "price": 6.75 },
+      { "item": "Full English breakfast", "price": 10.5, "note": "Bacon, sausage, fried egg, baked beans, tomato, mushroom, hash brown, toast, tea or coffee" }
+    ],
+    "lunch": [
+      { "item": "Homemade soup & roll", "price": 5.5 },
+      { "item": "Portion of chips", "price": 3.75 },
+      { "item": "Sandwiches, chips & salad", "price": 7.5 }
+    ],
+    "dinner": [
+      { "item": "1 course", "price": 14.5 },
+      { "item": "2 courses", "price": 20 },
+      { "item": "3 courses", "price": 24 }
+    ],
+    "starters": ["Chef's homemade soup & roll", "Farmhouse pâté with seeded white crusty toast", "Garlic mushrooms with salad"],
+    "mains": ["Homemade pie with fries, peas & carrots", "Lasagne with fries, salad & garlic bread", "Hunter's chicken with fries & salad", "Chicken curry, rice/chips & prawn crackers"],
+    "desserts": ["Bread & butter pudding", "Homemade lemon drizzle sponge", "Chocolate brownie", "Homemade Bakewell tart"],
+    "dessertNote": "Served with custard or cream",
+    "coffee": { "item": "Coffee, tea & mints", "price": 3 },
+    "note": "Please choose one option per course for the whole party."
+  }
+}

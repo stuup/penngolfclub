@@ -1,0 +1,14 @@
+{
+  "boards": [
+    { "image": "/assets/images/pgcsponsors1.jpg", "alt": "Sponsor logos: Steve Carter Golf, The Woodman, Horobin, The Mortgage Store Wolverhampton and Wednesfield Cars" },
+    { "image": "/assets/images/pgcsponsors2.jpg", "alt": "Sponsor logos: IDC Mortgage and Protection, Love Your Mortgage, The Red Lion Inn, CK Contracts, Heath Mill Garage and De Rosa Installations" },
+    { "image": "/assets/images/pgcsponsors3-b.jpg", "alt": "Sponsor logos: Menz Barber Shops, Contelec Engravings, G.I. Sykes, Studio 77, PIA Wealth Management and MTI Welding Technologies" },
+    { "image": "/assets/images/pgcsponsors3.jpg", "alt": "Sponsor logos: The Springhill at Penn, Grovenet, ACB Electrics, Enville Ales and TJ Industrial Roofing & Cladding" }
+  ],
+  "names": [
+    "Steve Carter Golf", "The Woodman", "Horobin", "The Mortgage Store Wolverhampton", "Wednesfield Cars",
+    "IDC Mortgage and Protection", "Love Your Mortgage", "The Red Lion Inn", "CK Contracts Ltd", "Heath Mill Garage", "De Rosa Installations Ltd",
+    "Menz Barber Shops", "Contelec Engravings Ltd", "G.I. Sykes", "Studio 77", "PIA Wealth Management", "MTI Welding Technologies Ltd",
+    "The Springhill at Penn", "Grovenet", "ACB Electrics Ltd", "Enville Ales", "TJ Industrial Roofing & Cladding Ltd"
+  ]
+}

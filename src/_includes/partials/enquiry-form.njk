@@ -1,0 +1,50 @@
+{#-
+  Netlify-powered enquiry form. Set `form` before including:
+  { name, title, intro, submit, extra: [{ name, label, type: text|email|tel|date|number|select|textarea, options, required, placeholder, wide }] }
+  Submissions appear in Netlify → Forms and can be emailed to the right department
+  (Site configuration → Notifications → Form submission notifications).
+-#}
+<section id="enquire" class="card scroll-mt-32 p-6 sm:p-8">
+  <h2 class="font-display text-2xl font-semibold text-heath-900 sm:text-3xl">{{ form.title or "Make an enquiry" }}</h2>
+  {%- if form.intro %}<p class="mt-2 text-heath-700">{{ form.intro }}</p>{% endif %}
+  <form name="{{ form.name }}" method="POST" action="/thanks/?form={{ form.name }}" data-netlify="true" netlify-honeypot="bot-field" class="mt-6 grid gap-5 sm:grid-cols-2">
+    <input type="hidden" name="form-name" value="{{ form.name }}">
+    <p class="hidden"><label>Don't fill this out: <input name="bot-field"></label></p>
+    <div>
+      <label class="field-label" for="{{ form.name }}-name">Your name <span class="text-red-600">*</span></label>
+      <input class="field" id="{{ form.name }}-name" name="name" type="text" autocomplete="name" required>
+    </div>
+    <div>
+      <label class="field-label" for="{{ form.name }}-email">Email <span class="text-red-600">*</span></label>
+      <input class="field" id="{{ form.name }}-email" name="email" type="email" autocomplete="email" required>
+    </div>
+    <div>
+      <label class="field-label" for="{{ form.name }}-phone">Phone</label>
+      <input class="field" id="{{ form.name }}-phone" name="phone" type="tel" autocomplete="tel">
+    </div>
+    {%- for f in form.extra or [] %}
+    <div class="{{ 'sm:col-span-2' if (f.type == 'textarea' or f.wide) else '' }}">
+      <label class="field-label" for="{{ form.name }}-{{ f.name }}">{{ f.label }}{% if f.required %} <span class="text-red-600">*</span>{% endif %}</label>
+      {%- if f.type == "select" %}
+      <select class="field" id="{{ form.name }}-{{ f.name }}" name="{{ f.name }}" {% if f.required %}required{% endif %}>
+        <option value="">Please choose…</option>
+        {%- for o in f.options %}<option{% if o == f.selected %} selected{% endif %}>{{ o }}</option>{% endfor %}
+      </select>
+      {%- elif f.type == "textarea" %}
+      <textarea class="field" id="{{ form.name }}-{{ f.name }}" name="{{ f.name }}" rows="5" {% if f.required %}required{% endif %} placeholder="{{ f.placeholder }}"></textarea>
+      {%- else %}
+      <input class="field" id="{{ form.name }}-{{ f.name }}" name="{{ f.name }}" type="{{ f.type or 'text' }}" {% if f.required %}required{% endif %} {% if f.placeholder %}placeholder="{{ f.placeholder }}"{% endif %} {% if f.type == 'number' %}min="1"{% endif %}>
+      {%- endif %}
+    </div>
+    {%- endfor %}
+    <div class="sm:col-span-2">
+      <label class="flex items-start gap-3 text-sm text-heath-700">
+        <input type="checkbox" name="consent" required class="mt-0.5 size-4 rounded border-heath-300 text-crest-600 focus:ring-crest-500">
+        <span>I'm happy for Penn Golf Club to contact me about this enquiry. See our <a href="/privacy/" class="link">privacy notice</a>.</span>
+      </label>
+    </div>
+    <div class="sm:col-span-2">
+      <button type="submit" class="btn-dark px-6 py-3 text-base">{{ form.submit or "Send enquiry" }} {% icon "arrowRight", "size-4" %}</button>
+    </div>
+  </form>
+</section>

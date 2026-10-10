@@ -1,0 +1,149 @@
+# Decap CMS — lets club staff edit content in the browser at /admin/.
+# Setup: see README.md ("Editing content"). Replace the repo below with the
+# GitHub repository this site is deployed from.
+backend:
+  name: github
+  repo: stuup/penngolfclub
+  branch: main
+  base_url: https://api.netlify.com
+  auth_endpoint: auth
+
+site_url: https://www.penngolfclub.co.uk
+display_url: https://www.penngolfclub.co.uk
+logo_url: /assets/brand/penn-golf-club-crest.svg
+media_folder: src/assets/images
+public_folder: /assets/images
+publish_mode: simple
+
+collections:
+  # ---------------------------------------------------------------- Course status
+  - name: status
+    label: Course status
+    description: Update this every morning — it appears in the header of every page.
+    files:
+      - name: courseStatus
+        label: Course status
+        file: src/_data/courseStatus.json
+        fields:
+          - { name: status, label: Status, widget: select, options: [open, restricted, closed] }
+          - { name: headline, label: Headline, widget: string, hint: "e.g. The course is open" }
+          - { name: message, label: Message, widget: text }
+          - { name: buggies, label: Buggy status, widget: select, options: [green, amber, red] }
+          - { name: updated, label: Last updated, widget: datetime }
+          - name: restrictions
+            label: Restrictions
+            widget: object
+            fields:
+              - { name: preferredLies, label: Preferred lies, widget: boolean, required: false }
+              - { name: fairwayMats, label: Fairway mats, widget: boolean, required: false }
+              - { name: noTrolleys, label: No trolleys, widget: boolean, required: false }
+              - { name: noBuggies, label: No buggies, widget: boolean, required: false }
+              - { name: temporaryGreens, label: Temporary greens, widget: boolean, required: false }
+
+  # ---------------------------------------------------------------- News
+  - name: news
+    label: News
+    label_singular: News post
+    folder: src/news/posts
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { name: title, label: Title, widget: string }
+      - { name: date, label: Date, widget: datetime, date_format: "DD MMM YYYY", time_format: false, format: "YYYY-MM-DD" }
+      - { name: category, label: Category, widget: select, options: [News, Results, Membership, Societies, Social, Course] }
+      - { name: summary, label: Summary, widget: text, hint: "One or two sentences shown on news cards" }
+      - { name: image, label: Image, widget: image, required: false }
+      - { name: body, label: Body, widget: markdown }
+
+  # ---------------------------------------------------------------- Club data
+  - name: data
+    label: Club information
+    files:
+      - name: events
+        label: Diary & open competitions
+        file: src/_data/events.json
+        fields:
+          - name: events
+            label: Events
+            widget: list
+            summary: "{{fields.date}} — {{fields.title}}"
+            fields:
+              - { name: title, label: Title, widget: string }
+              - { name: date, label: Date, widget: datetime, time_format: false, format: "YYYY-MM-DD" }
+              - { name: category, label: Category, widget: select, options: [Open, Social, Club, Juniors] }
+              - { name: format, label: Format, widget: string, required: false }
+              - { name: eligibility, label: Eligibility, widget: text, required: false }
+              - { name: fees, label: Entry fees, widget: string, required: false }
+              - { name: results, label: Results PDF, widget: file, required: false, media_folder: /src/documents, public_folder: /documents }
+          - name: regular
+            label: Regular fixtures
+            widget: list
+            fields:
+              - { name: title, label: Title, widget: string }
+              - { name: when, label: When, widget: string }
+              - { name: detail, label: Detail, widget: text }
+
+      - name: greenFees
+        label: Green fees
+        file: src/_data/greenFees.json
+        fields:
+          - { name: season, label: Season, widget: string }
+          - { name: holes, label: Holes, widget: number }
+          - name: rates
+            label: Rates
+            widget: list
+            fields:
+              - { name: days, label: Days, widget: string }
+              - { name: price, label: Price (£), widget: number, value_type: float }
+          - { name: notes, label: Notes, widget: text }
+          - { name: countyCards, label: County cards accepted, widget: list }
+
+      - name: membership
+        label: Membership prices
+        file: src/_data/membership.json
+        fields:
+          - { name: effectiveFrom, label: Prices effective from, widget: string }
+          - name: adult
+            label: Adult memberships
+            widget: list
+            fields:
+              - { name: name, label: Name, widget: string }
+              - { name: price, label: Annual price (£), widget: number, value_type: float }
+              - { name: access, label: When members can play, widget: text }
+              - { name: featured, label: Highlight, widget: boolean, required: false }
+          - name: juniors
+            label: Junior memberships
+            widget: list
+            fields:
+              - { name: name, label: Name, widget: string }
+              - { name: price, label: Price (£), widget: number, value_type: float }
+          - { name: youngAdults, label: Young adults text, widget: text }
+          - { name: ladiesOffer, label: Ladies offer text, widget: text }
+
+      - name: officers
+        label: Club officials
+        file: src/_data/officers.json
+        fields:
+          - name: officers
+            label: Officers
+            widget: list
+            fields:
+              - { name: role, label: Role, widget: string }
+              - { name: name, label: Name, widget: string }
+              - { name: contact, label: Contact details, widget: string, required: false }
+          - { name: board, label: Other board members, widget: list }
+
+      - name: holes
+        label: Hole descriptions
+        file: src/_data/holes.json
+        fields:
+          - name: holes
+            label: Holes
+            widget: list
+            allow_add: false
+            summary: "Hole {{fields.number}} {{fields.name}}"
+            fields:
+              - { name: number, label: Hole, widget: number }
+              - { name: name, label: Hole name, widget: string, required: false }
+              - { name: description, label: Description / playing tips, widget: text, required: false }
+              - { name: image, label: Image, widget: image, required: false }

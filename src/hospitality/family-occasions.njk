@@ -1,0 +1,45 @@
+---
+layout: layouts/page.njk
+title: Family Occasions
+intro: Birthdays, anniversaries and celebrations of every kind, in our dining and function suite with views to the Clee Hills.
+hero: /assets/images/beckie-11.jpg
+---
+<div class="prose-club">
+  <p>Penn Golf Club, with its stunning vista over open countryside, is a perfect venue for parties and family celebrations. Our large dining and function suite includes a parquet dance floor and can be dressed to suit your occasion.</p>
+  <p>Our Head Chef Penny will create a mouth-watering menu for you, whatever the size or style of party you're planning, and we will not be beaten on price and quality.</p>
+</div>
+
+<section class="card mt-10 p-6 sm:p-8">
+  <h2 class="font-display text-2xl font-semibold text-heath-900">Make it special</h2>
+  <ul class="mt-5 grid gap-3 sm:grid-cols-2">
+    {%- for x in ["Free car parking for guests", "Function suite available until midnight", "Prosecco or champagne on arrival and for toasts", "Quality wine selection for tables", "2 or 3 course meals, or a hot and/or cold finger buffet", "Table linen and centre pieces"].concat(hospitality.partyExtras) %}
+    <li class="flex gap-3 text-heath-800">{% icon "check", "size-5 text-crest-500 mt-0.5" %}<span>{{ x }}</span></li>
+    {%- endfor %}
+  </ul>
+</section>
+
+<div class="mt-10">
+{%- set gallery = [
+  { src: "/assets/images/beckie-11.jpg", alt: "Dining room decorated with blue and white balloons" },
+  { src: "/assets/images/beckie-14.jpg", alt: "Gold balloons and a decorated post box" },
+  { src: "/assets/images/beckie-15.jpg", alt: "A candy cart with fairy lights" },
+  { src: "/assets/images/beckie-6.jpg", alt: "Tables set with black and silver chair sashes" },
+  { src: "/assets/images/beckie-9.jpg", alt: "A balloon arch and shimmer wall for a 30th birthday" }
+] %}
+{% include "partials/gallery.njk" %}
+</div>
+
+<div class="mt-14">
+{%- set form = {
+  name: "party-enquiry",
+  title: "Plan your celebration",
+  submit: "Send party enquiry",
+  extra: [
+    { name: "occasion", label: "Occasion", type: "select", options: ["Birthday", "Anniversary", "Christening", "Funeral / wake", "Christmas party", "Other"] },
+    { name: "date", label: "Preferred date", type: "date" },
+    { name: "guests", label: "Approximate number of guests", type: "number" },
+    { name: "message", label: "Tell us about your plans", type: "textarea" }
+  ]
+} %}
+{% include "partials/enquiry-form.njk" %}
+</div>

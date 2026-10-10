@@ -1,0 +1,33 @@
+---
+layout: layouts/page.njk
+title: Safeguarding
+heading: Safeguarding Policies & Procedures
+intro: Everyone should be able to enjoy golf in a safe environment.
+hero: /assets/images/junior-golf-2.jpg
+---
+<div class="prose-club">
+  <p>We all have a responsibility to protect and safeguard children and adults at risk.</p>
+  <p>If you have any concerns about the welfare of a child in golf or outside the sport, or about the behaviour or practice of a coach, organiser or anyone else involved in the sport, talk to the England Golf governance team on <a href="tel:+441526351824">01526 351824</a> or email <a href="mailto:safeguarding@englandgolf.org">safeguarding@englandgolf.org</a>.</p>
+</div>
+
+<div class="mt-8 rounded-2xl border-l-4 border-red-600 bg-red-50 p-6">
+  <p class="flex items-center gap-2 font-semibold text-red-900">{% icon "alert", "size-5" %} Immediate concerns</p>
+  <p class="mt-2 text-red-900">If you have immediate concerns about the welfare of any child or adult, contact the police on <strong>101</strong> (or <strong>999</strong> in an emergency) or ring the NSPCC 24-hour free helpline on <a class="font-semibold underline" href="tel:+448088005000">0808 800 5000</a>.</p>
+</div>
+
+<div class="prose-club mt-8">
+  <h2>Concerns might include</h2>
+  <ul>
+    <li>Bullying of children by their peers or by adults</li>
+    <li>Individuals exploiting their position to gain access to children</li>
+    <li>Placing unrealistic performance expectations on children</li>
+    <li>Lack of awareness of the need for safeguarding</li>
+    <li>Poor planning</li>
+  </ul>
+  <h2>Club Welfare Officer</h2>
+  <p>Our Club Welfare Officer is <strong>Ian Foster</strong>: <a href="tel:+441902341142">01902 341142</a>, Option 3, or <a href="mailto:secretary@penngolfclub.co.uk">secretary@penngolfclub.co.uk</a>.</p>
+  <h2>Our policies</h2>
+</div>
+<div class="mt-4 grid gap-3">
+  {%- for doc in documents.safeguarding %}{% include "partials/doc-link.njk" %}{% endfor %}
+</div>

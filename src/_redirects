@@ -1,0 +1,29 @@
+# Permanent redirects from the previous (Club Systems) site so existing links,
+# bookmarks and search results keep working.
+/clubhouse                               /the-club/clubhouse/              301
+/history                                 /the-club/history/                301
+/officers                                /the-club/officials/              301
+/safeguarding-policies---procedures      /the-club/safeguarding/           301
+/sponsors                                /the-club/sponsors/               301
+/greenfees                               /visitors/                        301
+/societies                               /visitors/societies/              301
+/open-competitions                       /visitors/open-competitions/      301
+/open-results                            /visitors/open-results/           301
+/dress-code                              /visitors/dress-code/             301
+/scorecard                               /the-course/scorecard/            301
+/whs-course-slope-rating-tables          /the-course/course-handicap/      301
+/family-occasions                        /hospitality/family-occasions/    301
+/food---drink                            /hospitality/food-and-drink/      301
+/weddings                                /hospitality/weddings/            301
+/media-room                              /hospitality/meeting-room/        301
+/golf-coaching-and-club-fitting          /golf-shop/coaching/              301
+/how-to-join                             /membership/                      301
+/membership-prices---offers              /membership/prices/               301
+/playmoregolf-flexible-golf-membership   /membership/playmoregolf/         301
+/women-in-golf-charter                   /membership/women-in-golf/        301
+/how-to-find-us                          /contact/#find-us                 301
+/contact-us                              /contact/                         301
+/Page/CustomPage  pageId=22053           /diary/                           301
+/PrivacyPolicy                           /privacy/                         301
+/CookiesPolicy                           /privacy/                         301
+/TermsAndConditions                      /privacy/                         301

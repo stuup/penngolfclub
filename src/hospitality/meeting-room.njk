@@ -1,0 +1,60 @@
+---
+layout: layouts/page.njk
+title: Meeting Room
+heading: Meetings & conferences
+intro: A light, airy meeting room, catering from breakfast to dinner, and a stunning golf course on the doorstep.
+hero: /assets/images/media-room.jpg
+---
+{%- set m = hospitality.meetingRoom %}
+<div class="rounded-2xl bg-gorse-300/50 px-6 py-4 font-semibold text-heath-900">{% icon "ticket", "size-5 inline -mt-1 mr-1" %} Get {{ m.offer }}</div>
+
+<div class="prose-club mt-8">
+  <p>We offer a warm and friendly welcome, excellent meeting facilities and a stunning golf course to make your time with us enjoyable and memorable. Our meeting room can be set up to suit your exact requirements, and we can provide catering and refreshments from breakfast and coffee to evening dinner. You can even add 9 or 18 holes on our heathland course.</p>
+</div>
+
+<section class="mt-10">
+  <h2 class="font-display text-2xl font-semibold text-heath-900">Room features</h2>
+  <ul class="mt-4 grid gap-3 sm:grid-cols-2">
+    {%- for f in m.features %}<li class="flex gap-3 text-heath-800">{% icon "check", "size-5 text-crest-500" %}{{ f }}</li>{% endfor %}
+  </ul>
+</section>
+
+<section class="mt-12">
+  <h2 class="font-display text-2xl font-semibold text-heath-900">Packages</h2>
+  <div class="mt-5 grid gap-4 md:grid-cols-3">
+    {%- for p in m.packages %}
+    <div class="card flex flex-col p-6">
+      <h3 class="font-display text-xl font-semibold text-heath-900">{{ p.name }}</h3>
+      <p class="mt-1"><span class="font-display text-4xl font-semibold text-heath-900">{{ p.price | money }}</span> <span class="text-sm text-heath-600">per delegate</span></p>
+      <p class="mt-3 flex-1 text-sm text-heath-700">{{ p.includes }}</p>
+      <p class="mt-3 border-t border-heath-950/10 pt-3 text-xs text-heath-600"><strong>Optional extras:</strong> {{ p.extras }}</p>
+    </div>
+    {%- endfor %}
+  </div>
+  <p class="mt-4 text-heath-700"><strong>Add golf:</strong> {% for g in m.golf %}{{ g.name }} {{ g.price | money }} per delegate{% if not loop.last %} · {% endif %}{% endfor %}</p>
+</section>
+
+<div class="mt-10">
+{%- set gallery = [
+  { src: "/assets/images/media-room.jpg", alt: "Meeting room in boardroom layout" },
+  { src: "/assets/images/office-4.jpg", alt: "Working on a laptop in the meeting room" }
+] %}
+{% include "partials/gallery.njk" %}
+</div>
+
+<div class="mt-14">
+{%- set form = {
+  name: "meeting-enquiry",
+  title: "Check availability",
+  intro: "Or call 01902 341142, extension 3 or 4.",
+  submit: "Send meeting enquiry",
+  extra: [
+    { name: "company", label: "Company", required: false },
+    { name: "package", label: "Package", type: "select", options: ["Full Day", "Half Day", "Breakfast Meeting", "Not sure yet"] },
+    { name: "date", label: "Preferred date", type: "date" },
+    { name: "delegates", label: "Number of delegates", type: "number" },
+    { name: "message", label: "Requirements", type: "textarea" }
+  ]
+} %}
+{% include "partials/enquiry-form.njk" %}
+</div>

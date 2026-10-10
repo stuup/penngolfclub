@@ -1,0 +1,21 @@
+{%- set isPast = e.results %}
+<article class="card flex flex-col gap-5 p-6 sm:flex-row">
+  <div class="flex w-20 shrink-0 flex-col items-center justify-center self-start rounded-xl bg-heath-900 py-3 text-white">
+    <span class="text-xs font-semibold tracking-wider uppercase opacity-80">{{ e.date | weekdayShort }}</span>
+    <span class="font-display text-3xl leading-none font-semibold">{{ e.date | dayNum }}</span>
+    <span class="text-xs font-semibold tracking-wider uppercase opacity-80">{{ e.date | monthShort }}</span>
+  </div>
+  <div class="flex-1">
+    <h3 class="font-display text-xl font-semibold text-heath-900">{{ e.title }}</h3>
+    <p class="mt-1 font-medium text-crest-600">{{ e.format }}</p>
+    <p class="mt-2 text-sm text-heath-700">{{ e.eligibility }}</p>
+    <p class="mt-1 text-sm font-semibold text-heath-900">{{ e.fees }}</p>
+  </div>
+  <div class="flex shrink-0 items-start">
+    {%- if (events.events | upcoming).indexOf(e) > -1 %}
+    <a href="{{ site.links.bookOpens }}" class="btn-primary" rel="noopener">Enter online</a>
+    {%- elif e.results %}
+    <a href="{{ e.results }}" class="btn-outline">{% icon "download", "size-4" %} Results</a>
+    {%- endif %}
+  </div>
+</article>

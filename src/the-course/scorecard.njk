@@ -1,0 +1,111 @@
+---
+layout: layouts/page.njk
+title: Scorecard
+intro: Yardages, pars and stroke indexes for every set of tees — plus a digital card that works out your shots and Stableford points as you play.
+hero: /assets/images/penn-1.jpg
+wide: true
+---
+{%- set white = scorecard.tees[0] %}{% set yellow = scorecard.tees[1] %}{% set red = scorecard.tees[2] %}
+<script type="application/json" id="scorecard-data">{{ scorecard | json | safe }}</script>
+
+<section class="print-static" aria-labelledby="card-title">
+  <div class="flex flex-wrap items-end justify-between gap-4">
+    <h2 id="card-title" class="font-display text-3xl font-semibold text-heath-900">Course scorecard</h2>
+    <button type="button" onclick="window.print()" class="btn-outline no-print">{% icon "print", "size-4" %} Print</button>
+  </div>
+  <div class="card mt-6 overflow-x-auto">
+    <table class="scorecard w-full min-w-[720px] text-sm">
+      <caption class="sr-only">Penn Golf Club scorecard</caption>
+      <thead>
+        <tr>
+          <th scope="col">Hole</th>
+          <th scope="col"><span class="inline-flex items-center gap-1.5"><span class="size-2.5 rounded-full bg-white"></span>White</span></th>
+          <th scope="col"><span class="inline-flex items-center gap-1.5"><span class="size-2.5 rounded-full bg-gorse-400"></span>Yellow</span></th>
+          <th scope="col">Par</th>
+          <th scope="col">SI</th>
+          <th scope="col"><span class="inline-flex items-center gap-1.5"><span class="size-2.5 rounded-full bg-red-500"></span>Red</span></th>
+          <th scope="col">Ladies par</th>
+          <th scope="col">Ladies SI</th>
+        </tr>
+      </thead>
+      <tbody>
+        {%- for i in range(0, 18) %}
+        <tr>
+          <th scope="row" class="font-semibold text-heath-900"><a href="/the-course/#hole-{{ i + 1 }}" class="hover:text-crest-600">{{ i + 1 }}</a></th>
+          <td>{{ white.yards[i] }}</td><td>{{ yellow.yards[i] }}</td><td>{{ white.pars[i] }}</td><td>{{ white.si[i] }}</td>
+          <td>{{ red.yards[i] }}</td><td>{{ red.pars[i] }}</td><td>{{ red.si[i] }}</td>
+        </tr>
+        {%- if i == 8 or i == 17 %}
+        {%- set s = 0 if i == 8 else 9 %}
+        <tr class="subtotal">
+          <th scope="row">{{ "Out" if i == 8 else "In" }}</th>
+          <td>{{ white.yards | slice(s, s + 9) | sum | number }}</td><td>{{ yellow.yards | slice(s, s + 9) | sum | number }}</td><td>{{ white.pars | slice(s, s + 9) | sum }}</td><td></td>
+          <td>{{ red.yards | slice(s, s + 9) | sum | number }}</td><td>{{ red.pars | slice(s, s + 9) | sum }}</td><td></td>
+        </tr>
+        {%- endif %}
+        {%- endfor %}
+      </tbody>
+      <tfoot>
+        <tr class="bg-heath-900 font-semibold text-white">
+          <th scope="row">Total</th>
+          <td>{{ white.yards | sum | number }}</td><td>{{ yellow.yards | sum | number }}</td><td>{{ white.par }}</td><td></td>
+          <td>{{ red.yards | sum | number }}</td><td>{{ red.par }}</td><td></td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+  <div class="mt-4 grid gap-3 text-sm text-heath-700 sm:grid-cols-2 lg:grid-cols-4">
+    {%- for t in scorecard.tees %}
+    <p class="rounded-lg bg-white px-4 py-3 ring-1 ring-heath-950/10"><strong class="text-heath-900">{{ t.name }} ({{ t.label }})</strong><br>CR {{ t.rating }} · Slope {{ t.slope }} · Par {{ t.par }}</p>
+    {%- endfor %}
+  </div>
+  <p class="mt-3 text-sm text-heath-600">Men playing from the red tees use par {{ scorecard.tees[3].par }} with their own stroke indexes, which the digital card below applies automatically.</p>
+</section>
+
+<section class="print-digital mt-16" data-scorecard aria-labelledby="digital-title">
+  <div class="rounded-3xl bg-heath-900 p-6 text-white sm:p-8">
+    <div class="flex flex-wrap items-start justify-between gap-4">
+      <div>
+        <p class="eyebrow !text-gorse-400">New</p>
+        <h2 id="digital-title" class="mt-2 font-display text-3xl font-semibold">Digital scorecard</h2>
+        <p class="mt-2 max-w-2xl text-white/75">Pick your tees and enter your Handicap Index. We'll show the shots you receive on each hole, then work out net scores and Stableford points as you enter your gross scores. Your card is saved on this device.</p>
+      </div>
+    </div>
+    <div class="mt-6 grid gap-4 sm:grid-cols-3">
+      <div>
+        <label class="field-label !text-white/90" for="sc-tee">Tees</label>
+        <select id="sc-tee" name="tee" class="field">
+          {%- for t in scorecard.tees %}<option value="{{ t.id }}">{{ t.name }} — {{ t.label }} (par {{ t.par }})</option>{% endfor %}
+        </select>
+      </div>
+      <div>
+        <label class="field-label !text-white/90" for="sc-index">Handicap Index</label>
+        <input id="sc-index" name="index" class="field" inputmode="decimal" placeholder="e.g. 14.2 or +1.5" autocomplete="off">
+      </div>
+      <div>
+        <label class="field-label !text-white/90" for="sc-allowance">Handicap allowance</label>
+        <select id="sc-allowance" name="allowance" class="field">
+          <option value="1">100%</option>
+          <option value="0.95">95% — individual stroke play & Stableford</option>
+          <option value="0.9">90%</option>
+          <option value="0.85">85% — fourball / betterball</option>
+        </select>
+      </div>
+    </div>
+    <div class="mt-5 text-sm text-white/80" data-summary aria-live="polite"></div>
+  </div>
+
+  <div class="card mt-6 overflow-x-auto">
+    <table class="scorecard w-full min-w-[640px] text-sm">
+      <caption class="sr-only">Your scorecard</caption>
+      <thead><tr><th scope="col">Hole</th><th scope="col">Yards</th><th scope="col">Par</th><th scope="col">SI</th><th scope="col">Shots</th><th scope="col">Gross</th><th scope="col">Net</th><th scope="col">Points</th></tr></thead>
+      <tbody><tr><td colspan="8" class="py-10 text-heath-600">Loading the digital scorecard…</td></tr></tbody>
+      <tfoot></tfoot>
+    </table>
+  </div>
+  <div class="no-print mt-4 flex flex-wrap gap-3">
+    <button type="button" class="btn-outline" data-print>{% icon "print", "size-4" %} Print my card</button>
+    <button type="button" class="btn-outline" data-reset>Clear scores</button>
+  </div>
+  <p class="mt-4 text-xs text-heath-600">Calculations follow the World Handicap System: Course Handicap = Handicap Index × (Slope ÷ 113) + (Course Rating − Par), with the unrounded Course Handicap used to work out the Playing Handicap. Always check competition terms for the allowance in use.</p>
+</section>

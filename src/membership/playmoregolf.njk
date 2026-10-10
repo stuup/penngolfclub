@@ -1,0 +1,21 @@
+---
+layout: layouts/page.njk
+title: PlayMoreGolf Flexible Membership
+heading: PlayMoreGolf flexible membership
+intro: Points-based golf for players who want flexibility — at Penn and at partner clubs across the UK.
+hero: /assets/images/spencer-1.jpg
+---
+<div class="grid gap-8 md:grid-cols-[1fr_240px] md:items-start">
+  <div class="prose-club">
+    <p>For a one-off annual subscription of only <strong>£420</strong> you receive <strong>100 points</strong>. If you want to play more golf, simply buy more points.</p>
+    <p>You can use <strong>80 points at Penn Golf Club</strong>, your home club, and <strong>20 points away</strong> at any other PlayMoreGolf partner club in the UK, including Celtic Manor, Carden Park and Wokefield Park.</p>
+    <p>As a member you'll have your own online account where you can refer friends or buy more points, depending on how often you play. Booking couldn't be easier: select your course, date and time, and you're set. You can also use your points for up to three friends, which adds even more flexibility.</p>
+  </div>
+  <img src="/assets/images/play-more-golf.jpg" alt="PlayMore.Golf logo" class="w-full rounded-2xl" sizes="240px">
+</div>
+<div class="mt-8 grid gap-4 sm:grid-cols-3">
+  {%- for s in [{ v: "£420", l: "Annual subscription" }, { v: "100", l: "Points included" }, { v: "80 / 20", l: "Home / away points" }] %}
+  <div class="card p-5 text-center"><p class="font-display text-4xl font-semibold text-heath-900">{{ s.v }}</p><p class="text-sm text-heath-600">{{ s.l }}</p></div>
+  {%- endfor %}
+</div>
+<a href="{{ site.links.playMoreGolf }}" class="btn-primary mt-8 px-6 py-3 text-base" rel="noopener">Apply with PlayMoreGolf {% icon "external", "size-4" %}</a>

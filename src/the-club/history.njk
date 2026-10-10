@@ -1,0 +1,53 @@
+---
+layout: layouts/page.njk
+title: History
+intro: Golf has been played on Penn Common since the early 1890s — arguably the oldest course in the Wolverhampton area.
+hero: /assets/images/hickory-clubs-2.jpg
+---
+{%- set milestones = [
+  { y: "Early 1890s", t: "The South Staffordshire Golf Club is founded on Penn Common by local dignitaries including Charles and Neville Mander, W Wentworth Walker, W R Lysaght, Mein Wilkie, Thomas Graham and Dr Biggam." },
+  { y: "1893", t: "Nearly 100 members and a nine-hole course. The Barley Mow Inn serves as the first clubhouse, and Samuel Jones of Hoylake is the first professional." },
+  { y: "c. 1900", t: "The course is extended to eighteen holes totalling 4,700 yards, and the clubhouse grows to a pavilion style." },
+  { y: "1908", t: "South Staffordshire Golf Club relocates to Danescourt, Tettenhall. Members who stay at the old course form Penn Golf Club." },
+  { y: "1935", t: "Charlie Stowe is summoned from the coal mine to play for England." },
+  { y: "1938", t: "Stowe is part of the first Great Britain & Ireland side to beat the Americans in the Walker Cup." },
+  { y: "1955", t: "Members buy the land from the Duke of Sutherland, ending the days of grazing horses and cattle on the course." }
+] %}
+
+<ol class="relative mb-14 space-y-6 border-l-2 border-crest-200 pl-8">
+  {%- for m in milestones %}
+  <li class="relative">
+    <span class="absolute top-1.5 -left-[41px] size-4 rounded-full border-4 border-cream bg-crest-400"></span>
+    <p class="font-display text-lg font-semibold text-crest-600">{{ m.y }}</p>
+    <p class="mt-1 text-heath-800">{{ m.t }}</p>
+  </li>
+  {%- endfor %}
+</ol>
+
+<div class="prose-club">
+  <h2>The founding of golf on Penn Common</h2>
+  <p>The course at Penn Common dates back to the early 1890s, when a group of distinguished local gentlemen and dignitaries founded what was then called The South Staffordshire Golf Club. Dr Biggam became the first Captain, and Mein Wilkie, a partner at a Wolverhampton accountants, the first Honorary Treasurer. T F Waterhouse was the first Honorary Secretary and The Earl of Dartmouth the President.</p>
+  <p>By 1904 the Committee were looking to relocate. They secured a plot of land in Danescourt, Tettenhall, and in 1908 The South Staffordshire Golf Club moved there. Some members decided to stay at the old course, which became Penn Golf Club.</p>
+
+  <h2>Two remarkable golfers</h2>
+  <p>Two of the most colourful characters ever to grace English golf played their first tentative shots at Penn. In their early days they sometimes had to shoo away horses and cattle to play, because of local grazing rights on the ancient common.</p>
+
+  <figure>
+    <img src="/assets/images/penn-c-stowe-.jpg" alt="Charlie Stowe (left) during his playing career" sizes="(min-width: 1024px) 720px, 100vw">
+    <figcaption>Charlie Stowe (left), Walker Cup winner in 1938.</figcaption>
+  </figure>
+
+  <h3>Charlie Stowe</h3>
+  <p>Charlie Stowe was born in a cottage on the common and lived all his life in a little semi near the course. His front parlour was rumoured to hold a mountain of splendid silver cups and cut glass, mementos of his days of glory. He started as an artisan at Penn because he couldn't afford the fees, but by the age of 26 he had won Midland championships. In 1935 he was summoned from the coal mine to play for England, the start of an amateur career with a long list of victories for his country.</p>
+  <p>In 1938 he was a member of the first GB&amp;I side to beat the Americans in the Walker Cup, doing his part by beating the redoubtable Charles Kocsis. Stowe came close to winning a major three times: runner-up in the Amateur (1948) and twice in the English Championship (1947 and 1949).</p>
+  <p>His Black Country humour was legendary. When the England captain suggested he would phone him for a game, Charlie replied: <em>“Telephone? We ay on the bleedin’ gas yet!”</em></p>
+
+  <figure>
+    <img src="/assets/images/compston-penn.jpg" alt="Archie Compston (left) walking with Walter Hagen" sizes="(min-width: 1024px) 720px, 100vw">
+    <figcaption>Archie Compston (left) with Walter Hagen.</figcaption>
+  </figure>
+
+  <h3>Archie Compston</h3>
+  <p>Archie Compston, sacked by Kidderminster at 16 for idleness, was one of Britain's leading professionals from 1925 to the early 1930s. He came close to winning the Open, finishing runner-up in 1925 and third in 1928. He was best known for his close association with the Prince of Wales (later Edward VIII and then Duke of Windsor), a keen golfer, and for his incredible 18 up with 17 to play victory in a challenge match against the mighty Walter Hagen.</p>
+  <p>Penn can look back with pride on two outstanding golfers who cut their first divots on the common.</p>
+</div>

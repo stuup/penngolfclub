@@ -1,0 +1,22 @@
+---
+layout: layouts/base.njk
+---
+<article>
+  <header class="relative isolate overflow-hidden bg-heath-950">
+    <img src="{{ image or '/assets/images/pgc1.jpg' }}" alt="" class="absolute inset-0 -z-10 h-full w-full object-cover opacity-40" sizes="100vw" loading="eager">
+    <div class="absolute inset-0 -z-10 bg-gradient-to-t from-heath-950 to-heath-950/30"></div>
+    <div class="container-site max-w-3xl py-16 sm:py-24">
+      <nav aria-label="Breadcrumb" class="text-sm text-white/70"><a href="/" class="hover:text-white">Home</a> / <a href="/news/" class="hover:text-white">News</a></nav>
+      <p class="mt-6 text-sm font-semibold tracking-wider text-gorse-400 uppercase"><time datetime="{{ page.date | isoDay }}">{{ page.date | dateLong }}</time>{% if category %} · {{ category }}{% endif %}</p>
+      <h1 class="mt-3 text-4xl font-semibold text-white sm:text-5xl">{{ title }}</h1>
+      {%- if summary %}<p class="mt-5 text-xl text-white/85">{{ summary }}</p>{% endif %}
+    </div>
+  </header>
+  <div class="container-site max-w-3xl pt-12">
+    <div class="prose-club">{{ content | safe }}</div>
+    <div class="mt-12 flex flex-wrap items-center justify-between gap-4 border-t border-heath-950/10 pt-6">
+      <a href="/news/" class="link">← All news</a>
+      <a href="/news/feed.xml" class="inline-flex items-center gap-2 text-sm text-heath-700 hover:text-crest-600">{% icon "rss", "size-4" %} News feed</a>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,30 @@
+---
+layout: layouts/base.njk
+---
+{#- Standard inner page: hero banner, optional section sub-navigation, content. -#}
+{%- set section = navigation | sectionFor(page.url) -%}
+
+{% include "partials/page-hero.njk" %}
+
+<div class="container-site {{ 'grid gap-12 lg:grid-cols-[minmax(0,1fr)_280px]' if section and not wide else '' }} pt-12 lg:pt-16">
+  <div class="min-w-0">
+    {{ content | safe }}
+  </div>
+  {%- if section and not wide %}
+  <aside class="no-print lg:pt-1">
+    <nav aria-label="{{ section.title }}" class="card sticky top-32 p-5">
+      <p class="eyebrow">{{ section.title }}</p>
+      <ul class="mt-3 space-y-1">
+        {%- for child in section.children %}
+        <li><a href="{{ child.url }}" class="flex items-center justify-between rounded-lg px-3 py-2 text-[15px] {{ 'bg-heath-900 font-semibold text-white' if child.url == page.url else 'text-heath-800 hover:bg-heath-50' }}" {% if child.url == page.url %}aria-current="page"{% endif %}>{{ child.title }}</a></li>
+        {%- endfor %}
+      </ul>
+      <div class="mt-5 border-t border-heath-950/10 pt-5 text-sm">
+        <p class="font-semibold text-heath-900">Questions?</p>
+        <a href="{{ site.phone | telHref }}" class="mt-2 flex items-center gap-2 text-heath-800 hover:text-crest-600">{% icon "phone", "size-4 text-crest-500" %} {{ site.phone }}</a>
+        <a href="mailto:{{ site.email }}" class="mt-1.5 flex items-center gap-2 text-heath-800 hover:text-crest-600">{% icon "mail", "size-4 text-crest-500" %} Email the office</a>
+      </div>
+    </nav>
+  </aside>
+  {%- endif %}
+</div>

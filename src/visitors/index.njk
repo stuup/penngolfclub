@@ -1,0 +1,59 @@
+---
+layout: layouts/page.njk
+title: Green Fees & Tee Times
+heading: Visitors welcome
+intro: Play one of the Midlands' hidden gems — a traditional heathland course with excellent greens all year round.
+hero: /assets/images/spencer-12.jpg
+heroCtas:
+  - { label: "Book a tee time online", url: "https://visitors.brsgolf.com/penn#/course/1" }
+  - { label: "Call the Golf Shop", url: "tel:+441902330472" }
+---
+<section aria-labelledby="fees-h">
+  <p class="eyebrow">{{ greenFees.season }}</p>
+  <h2 id="fees-h" class="mt-2 font-display text-3xl font-semibold text-heath-900">Green fees — {{ greenFees.holes }} holes</h2>
+  <div class="mt-6 grid gap-4 sm:grid-cols-2">
+    {%- for r in greenFees.rates %}
+    <div class="card p-6">
+      <p class="text-heath-700">{{ r.days }}</p>
+      <p class="mt-1 font-display text-5xl font-semibold text-heath-900">{{ r.price | money }}</p>
+      <p class="mt-1 text-sm text-heath-600">per person</p>
+    </div>
+    {%- endfor %}
+  </div>
+  <p class="mt-4 flex items-start gap-2 text-heath-700">{% icon "info", "size-5 text-crest-500 mt-0.5" %} {{ greenFees.notes }}</p>
+</section>
+
+<section class="mt-12 grid gap-6 sm:grid-cols-2">
+  <div class="rounded-2xl bg-crest-50 p-6 ring-1 ring-crest-200">
+    <h2 class="font-display text-xl font-semibold text-heath-900">County cards accepted</h2>
+    <ul class="mt-3 space-y-2 text-heath-800">
+      {%- for c in greenFees.countyCards %}<li class="flex gap-2">{% icon "check", "size-5 text-crest-500" %}<span>{{ c }}</span></li>{% endfor %}
+    </ul>
+  </div>
+  <div class="rounded-2xl bg-sand p-6">
+    <h2 class="font-display text-xl font-semibold text-heath-900">Before you visit</h2>
+    <ul class="mt-3 space-y-2 text-heath-800">
+      <li class="flex gap-2">{% icon "check", "size-5 text-crest-500" %}<span>Please read our <a href="/visitors/dress-code/" class="link">dress code</a> — proper golf shoes are required.</span></li>
+      <li class="flex gap-2">{% icon "check", "size-5 text-crest-500" %}<span>Check the <a href="/the-course/status/" class="link">course status & weather</a> on the day.</span></li>
+      <li class="flex gap-2">{% icon "check", "size-5 text-crest-500" %}<span>Food is served all day — <a href="/hospitality/food-and-drink/" class="link">breakfast before or a meal after</a>.</span></li>
+      <li class="flex gap-2">{% icon "check", "size-5 text-crest-500" %}<span>Work out your <a href="/the-course/course-handicap/" class="link">Course Handicap</a> in advance.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="mt-12">
+  <h2 class="font-display text-2xl font-semibold text-heath-900">More ways to play</h2>
+  <div class="mt-5 grid gap-4 sm:grid-cols-3">
+    {%- for l in [
+      { t: "Societies", d: "Packages from " + (societies.packages[0].weekday | money2), u: "/visitors/societies/", i: "users" },
+      { t: "Open competitions", d: "Ladies, men's & seniors opens", u: "/visitors/open-competitions/", i: "trophy" },
+      { t: "PlayMoreGolf", d: "Flexible points membership", u: "/membership/playmoregolf/", i: "ticket" }
+    ] %}
+    <a href="{{ l.u }}" class="card group p-5">
+      <span class="flex size-11 items-center justify-center rounded-xl bg-crest-100 text-crest-600">{% icon l.i, "size-5" %}</span>
+      <p class="mt-3 font-semibold text-heath-900 group-hover:text-crest-600">{{ l.t }}</p>
+      <p class="text-sm text-heath-700">{{ l.d }}</p>
+    </a>
+    {%- endfor %}
+  </div>
+</section>

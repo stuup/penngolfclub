@@ -1,0 +1,62 @@
+---
+layout: layouts/page.njk
+title: Course Handicap & WHS Ratings
+heading: Course Handicap calculator
+intro: Find your Course and Playing Handicap at Penn for every set of tees, using our official World Handicap System ratings.
+hero: /assets/images/penn-4.jpg
+wide: true
+---
+<script type="application/json" id="scorecard-data">{{ scorecard | json | safe }}</script>
+
+<section class="rounded-3xl bg-crest-100 p-6 sm:p-8" data-handicap>
+  <div class="grid gap-6 lg:grid-cols-[320px_1fr] lg:items-start">
+    <div>
+      <label for="hi" class="field-label text-lg">Your Handicap Index</label>
+      <input id="hi" name="index" inputmode="decimal" autocomplete="off" placeholder="e.g. 18.4" class="field py-3 text-2xl font-semibold">
+      <p class="mt-2 text-sm text-heath-700">Use “+” for a plus handicap, e.g. +1.2. Your index is shown in the My England Golf app.</p>
+    </div>
+    <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4" data-results aria-live="polite">
+      <noscript><p class="col-span-full">Use the tables below to look up your Course Handicap.</p></noscript>
+    </div>
+  </div>
+</section>
+
+<div class="mt-14 grid gap-12 lg:grid-cols-[1fr_320px]">
+  <div class="prose-club">
+    <h2>About Course and Slope Ratings</h2>
+    <p>When a golf course is rated, playing length and obstacle factors are evaluated, so the unique challenges of each course can be quantified. After a thorough evaluation by a qualified rating team, a Course Rating and Slope Rating is issued for each set of tees.</p>
+    <p>A <strong>Course Rating</strong> is the expected score for a scratch player (Handicap Index 0.0) in normal playing conditions, while a <strong>Bogey Rating</strong> is the expected score for a bogey player (Handicap Index 20.0 to 24.0).</p>
+    <p>Together these produce the <strong>Slope Rating</strong>, a measure of the relative difficulty of a course for players other than scratch golfers. The higher the Slope Rating, the more strokes a higher-handicapped player needs to play that course on equal terms with a scratch player.</p>
+    <h3>How it's calculated</h3>
+    <p class="not-prose rounded-xl bg-heath-900 px-5 py-4 font-medium text-white">Course Handicap = Handicap Index × (Slope Rating ÷ 113) + (Course Rating − Par)</p>
+    <p>Your <strong>Playing Handicap</strong> is your Course Handicap multiplied by the handicap allowance for the format, for example 95% for individual stroke play or 85% for fourball betterball.</p>
+  </div>
+  <aside class="space-y-3">
+    {%- set doc = documents.handicapTable %}{% include "partials/doc-link.njk" %}
+    <a href="/the-course/scorecard/" class="card flex items-center gap-3 p-4 font-semibold text-heath-900 hover:text-crest-600">{% icon "table", "size-5 text-crest-500" %} Open the digital scorecard</a>
+  </aside>
+</div>
+
+<section class="mt-14" aria-labelledby="tables-title">
+  <h2 id="tables-title" class="font-display text-3xl font-semibold text-heath-900">Course Handicap tables</h2>
+  <p class="mt-2 text-heath-700">Find your Handicap Index range to read off your Course Handicap.</p>
+  <div class="mt-6 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+    {%- for t in handicapTables %}
+    <div class="card overflow-hidden">
+      <div class="flex items-center gap-2 bg-heath-900 px-4 py-3 text-white">
+        <span class="size-3.5 rounded-full ring-1 ring-white/40" style="background:{{ t.colour }}"></span>
+        <h3 class="font-semibold">{{ t.name }} · {{ t.label }}</h3>
+      </div>
+      <p class="border-b border-heath-950/10 px-4 py-2 text-xs text-heath-600">CR {{ t.rating }} · Slope {{ t.slope }} · Par {{ t.par }}</p>
+      <div class="max-h-[480px] overflow-y-auto">
+        <table class="w-full text-sm tabular-nums">
+          <thead class="sticky top-0 bg-heath-50 text-xs text-heath-700"><tr><th scope="col" class="px-4 py-2 text-left font-semibold">Handicap Index</th><th scope="col" class="px-4 py-2 text-right font-semibold">Course Hcp</th></tr></thead>
+          <tbody class="divide-y divide-heath-950/5">
+            {%- for r in t.rows %}<tr><td class="px-4 py-1.5 text-heath-800">{{ r.range }}</td><td class="px-4 py-1.5 text-right font-semibold text-heath-900">{{ r.ch }}</td></tr>{% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    {%- endfor %}
+  </div>
+</section>

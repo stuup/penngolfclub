@@ -1,0 +1,12 @@
+{
+  "applicationForm": { "title": "Membership application form", "url": "/documents/membership-application-form.doc", "type": "Word" },
+  "societyPackages": { "title": "Summer society packages 2026", "url": "/documents/society-packages-2026.pdf", "type": "PDF" },
+  "societyMenu": { "title": "Society party catering menu 2026", "url": "/documents/society-party-catering-menu-2026.pdf", "type": "PDF" },
+  "handicapTable": { "title": "Course Handicap table", "url": "/documents/course-handicap-table.pdf", "type": "PDF" },
+  "womenInGolf": { "title": "Women in Golf Charter document", "url": "/documents/women-in-golf-charter.pdf", "type": "PDF" },
+  "safeguarding": [
+    { "title": "Young Person and Children Safeguarding Policy", "url": "/documents/young-person-safeguarding-policy.docx", "type": "Word" },
+    { "title": "Adults Safeguarding Policy", "url": "/documents/adults-safeguarding-policy.docx", "type": "Word" },
+    { "title": "Equality & Diversity Policy", "url": "/documents/equality-and-diversity-policy.docx", "type": "Word" }
+  ]
+}

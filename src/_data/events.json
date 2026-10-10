@@ -1,0 +1,54 @@
+{
+  "events": [
+    {
+      "title": "Ladies Open Competition",
+      "date": "2026-05-29",
+      "category": "Open",
+      "format": "3 Ball Alliance — Stableford, 2 from 3 scores to count",
+      "eligibility": "Handicap Index limit 36.0. Playing allowance 85% of Course Handicap.",
+      "fees": "Visitors £20.00pp · Members £13.00pp",
+      "results": "/documents/results-ladies-may-open-2026.pdf"
+    },
+    {
+      "title": "Ladies Open Competition",
+      "date": "2026-07-24",
+      "category": "Open",
+      "format": "Am/Am — 2 from 4 scores to count",
+      "eligibility": "Handicap Index limit 36.0. Playing allowance 85% of Course Handicap.",
+      "fees": "Visitors £20.00pp · Members £13.00pp",
+      "results": "/documents/results-ladies-july-open-2026.pdf"
+    },
+    {
+      "title": "Men's Open — Howard Thirlby Rosebowl",
+      "date": "2026-07-25",
+      "category": "Open",
+      "format": "Individual Strokeplay — Medal",
+      "eligibility": "Handicap Index limit 18.0. Playing allowance 85% of Course Handicap. Entrants must be 18 or over on 1st June 2026.",
+      "fees": "Visitors £28.00pp · Members £18.00pp",
+      "results": "/documents/results-mens-open-rosebowl-2026.pdf"
+    },
+    {
+      "title": "Seniors Mixed Open Competition",
+      "date": "2026-08-12",
+      "category": "Open",
+      "format": "Fourball Betterball — Stableford",
+      "eligibility": "Handicap Index limits: Men 28.0, Ladies 36.0. Entrants must be 55 or over on 1st May 2026.",
+      "fees": "Visitors £50.00 per pair · Members £40.00 per pair",
+      "results": "/documents/results-seniors-mixed-open-2026.pdf"
+    },
+    {
+      "title": "Senior Men's Open Competition",
+      "date": "2026-08-20",
+      "category": "Open",
+      "format": "Am/Am — 2 from 4 scores to count",
+      "eligibility": "Handicap Index limit 28.0. Playing allowance 85% of Course Handicap. Entrants must be 55 or over on 1st May 2026.",
+      "fees": "Visitors £28.00pp · Members £18.00pp",
+      "results": "/documents/results-senior-mens-open-2026.pdf"
+    }
+  ],
+  "regular": [
+    { "title": "Ladies' Day", "when": "Every Tuesday", "detail": "Competitions and coffee with the Ladies' section — new golfers always welcome." },
+    { "title": "Seniors' section", "when": "Weekly", "detail": "An active Seniors' section with competitions open to all comers." },
+    { "title": "Themed nights", "when": "Throughout the year", "detail": "Great-value themed food nights in the clubhouse — watch the diary and news for dates." }
+  ]
+}

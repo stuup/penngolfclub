@@ -1,0 +1,94 @@
+<header role="banner" class="sticky top-0 z-50">
+  {# Utility bar #}
+  <div class="status-bar bg-heath-950 text-[13px] text-white/80">
+    <div class="container-site flex h-10 items-center justify-between gap-4">
+      {% include "partials/status-pill.njk" %}
+      <div class="flex items-center gap-5">
+        <a href="{{ site.phone | telHref }}" class="hidden items-center gap-1.5 hover:text-white md:inline-flex">{% icon "phone", "size-3.5" %} {{ site.phone }}</a>
+        <a href="mailto:{{ site.email }}" class="hidden items-center gap-1.5 hover:text-white lg:inline-flex">{% icon "mail", "size-3.5" %} {{ site.email }}</a>
+        <a href="{{ site.links.membersHub }}" class="inline-flex items-center gap-1.5 hover:text-white" rel="noopener">{% icon "lock", "size-3.5" %} Members' Hub</a>
+      </div>
+    </div>
+  </div>
+
+  {# Main bar #}
+  <div class="border-b border-heath-950/10 bg-cream/95 backdrop-blur supports-[backdrop-filter]:bg-cream/85">
+    <div class="container-site flex h-[72px] items-center justify-between gap-4">
+      <a href="/" class="flex shrink-0 items-center gap-3" aria-label="{{ site.name }} — home">
+        <img src="/assets/brand/penn-golf-club-crest.svg" alt="" width="52" height="52" class="size-12 lg:size-[52px]" eleventy:ignore>
+        <span class="leading-none whitespace-nowrap">
+          <span class="block font-display text-[1.35rem] font-semibold tracking-tight text-heath-900">Penn Golf Club</span>
+          <span class="mt-1 block text-[11px] font-medium tracking-[0.18em] text-crest-500 uppercase">Est. 1908 · Wolverhampton</span>
+        </span>
+      </a>
+
+      <nav aria-label="Main" class="hidden xl:block">
+        <ul class="flex items-center gap-0.5">
+          {%- for item in navigation %}
+          {%- set active = page.url == item.url or (item.url != "/" and page.url.startsWith(item.url)) or (item.children and page.url == "/news/" and item.title == "The Club") %}
+          <li class="relative" data-dropdown>
+            {%- if item.children %}
+            <button type="button" class="flex items-center gap-1 rounded-full px-2.5 py-2 text-[15px] font-medium whitespace-nowrap transition-colors hover:bg-heath-900/5 {{ 'text-crest-600' if active else 'text-heath-900' }}" aria-expanded="false" aria-haspopup="true">
+              {{ item.title }} {% icon "chevronDown", "size-4 opacity-60 transition-transform" %}
+            </button>
+            <div class="invisible absolute top-full left-1/2 w-64 -translate-x-1/2 pt-2 opacity-0 transition-all duration-150 data-[open]:visible data-[open]:opacity-100" data-menu>
+              <ul class="card overflow-hidden p-2">
+                {%- for child in item.children %}
+                <li><a href="{{ child.url }}" class="block rounded-lg px-3 py-2 text-sm hover:bg-heath-50 {{ 'bg-heath-50 font-semibold text-heath-900' if page.url == child.url else 'text-heath-800' }}" {% if page.url == child.url %}aria-current="page"{% endif %}>{{ child.title }}</a></li>
+                {%- endfor %}
+              </ul>
+            </div>
+            {%- else %}
+            <a href="{{ item.url }}" class="block rounded-full px-2.5 py-2 text-[15px] font-medium whitespace-nowrap transition-colors hover:bg-heath-900/5 {{ 'text-crest-600' if active else 'text-heath-900' }}" {% if active %}aria-current="page"{% endif %}>{{ item.title }}</a>
+            {%- endif %}
+          </li>
+          {%- endfor %}
+        </ul>
+      </nav>
+
+      <div class="flex items-center gap-2">
+        <a href="{{ site.links.bookTeeTime }}" class="btn-primary hidden whitespace-nowrap sm:inline-flex" rel="noopener">{% icon "flag", "size-4" %} Book a tee time</a>
+        <button type="button" class="inline-flex size-11 items-center justify-center rounded-full text-heath-900 hover:bg-heath-900/5 xl:hidden" aria-controls="mobile-menu" aria-expanded="false" data-menu-toggle>
+          <span class="sr-only">Open menu</span>{% icon "menu", "size-6" %}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  {# Mobile drawer #}
+  <div id="mobile-menu" class="fixed inset-0 z-50 xl:hidden" hidden>
+    <div class="absolute inset-0 bg-heath-950/50 backdrop-blur-sm" data-menu-close></div>
+    <nav aria-label="Mobile" class="absolute inset-y-0 right-0 flex w-full max-w-sm flex-col overflow-y-auto bg-cream shadow-2xl">
+      <div class="flex h-16 items-center justify-between border-b border-heath-950/10 px-5">
+        <span class="font-display text-lg font-semibold text-heath-900">Menu</span>
+        <button type="button" class="inline-flex size-11 items-center justify-center rounded-full hover:bg-heath-900/5" data-menu-close>
+          <span class="sr-only">Close menu</span>{% icon "close", "size-6" %}
+        </button>
+      </div>
+      <ul class="flex-1 divide-y divide-heath-950/10 px-5">
+        {%- for item in navigation %}
+        <li>
+          {%- if item.children %}
+          <details class="group py-1" {% if page.url.startsWith(item.url) %}open{% endif %}>
+            <summary class="flex cursor-pointer list-none items-center justify-between py-3 text-lg font-medium text-heath-900">
+              {{ item.title }} {% icon "chevronDown", "size-5 transition-transform group-open:rotate-180" %}
+            </summary>
+            <ul class="mb-3 space-y-1 border-l-2 border-crest-200 pl-4">
+              {%- for child in item.children %}
+              <li><a href="{{ child.url }}" class="block py-1.5 {{ 'font-semibold text-crest-600' if page.url == child.url else 'text-heath-800' }}">{{ child.title }}</a></li>
+              {%- endfor %}
+            </ul>
+          </details>
+          {%- else %}
+          <a href="{{ item.url }}" class="block py-4 text-lg font-medium text-heath-900">{{ item.title }}</a>
+          {%- endif %}
+        </li>
+        {%- endfor %}
+      </ul>
+      <div class="space-y-3 border-t border-heath-950/10 p-5">
+        <a href="{{ site.links.bookTeeTime }}" class="btn-primary w-full" rel="noopener">{% icon "flag", "size-4" %} Book a tee time</a>
+        <a href="{{ site.phone | telHref }}" class="btn-outline w-full">{% icon "phone", "size-4" %} {{ site.phone }}</a>
+      </div>
+    </nav>
+  </div>
+</header>

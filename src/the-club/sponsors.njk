@@ -1,0 +1,31 @@
+---
+layout: layouts/page.njk
+title: Our Sponsors
+intro: Thanks to all of our sponsors for their fantastic support.
+hero: /assets/images/spencer-1.jpg
+---
+<div class="grid gap-4 sm:grid-cols-2" data-gallery>
+  {%- for b in sponsors.boards %}
+  <a href="{{ b.image }}" class="card block overflow-hidden p-4"><img src="{{ b.image }}" alt="{{ b.alt }}" class="aspect-square w-full object-contain" sizes="(min-width: 1024px) 400px, 50vw"></a>
+  {%- endfor %}
+</div>
+
+<h2 class="mt-12 font-display text-2xl font-semibold text-heath-900">Our supporters</h2>
+<ul class="mt-4 grid gap-x-6 gap-y-2 text-heath-800 sm:grid-cols-2">
+  {%- for n in sponsors.names %}<li class="flex items-center gap-2">{% icon "check", "size-4 text-crest-500" %} {{ n }}</li>{% endfor %}
+</ul>
+
+<div class="mt-14">
+{%- set form = {
+  name: "sponsorship",
+  title: "Become a sponsor",
+  intro: "Put your business in front of our 600 members and thousands of visitors each year with tee, hole, board or competition sponsorship. Tell us a little about your business and we'll be in touch.",
+  submit: "Send sponsorship enquiry",
+  extra: [
+    { name: "business", label: "Business name", required: true },
+    { name: "interest", label: "Interested in", type: "select", options: ["Hole / tee sign", "Sponsors board", "Open competition", "Junior golf", "Not sure yet"] },
+    { name: "message", label: "Anything else?", type: "textarea" }
+  ]
+} %}
+{% include "partials/enquiry-form.njk" %}
+</div>

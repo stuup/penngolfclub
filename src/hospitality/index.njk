@@ -1,0 +1,32 @@
+---
+layout: layouts/page.njk
+title: Hospitality
+heading: Hospitality at Penn
+intro: Weddings, parties, meetings and great home-cooked food — all with views across the course to the Clee Hills.
+hero: /assets/images/penn-clubhouse-2.jpg
+wide: true
+---
+<div class="grid gap-6 md:grid-cols-2">
+  {%- for c in [
+    { t: "Food & Drink", d: "Home-cooked food served all day, every day, plus traditional ales and themed nights.", u: "/hospitality/food-and-drink/", i: "/assets/images/beckie-17.jpg", icon: "utensils" },
+    { t: "Weddings", d: "A unique wedding venue with a function suite, parquet dance floor and views over 35 miles.", u: "/hospitality/weddings/", i: "/assets/images/beckie-7.jpg", icon: "heart" },
+    { t: "Family Occasions", d: "Birthdays, anniversaries, christenings and celebrations of every size.", u: "/hospitality/family-occasions/", i: "/assets/images/beckie-11.jpg", icon: "star" },
+    { t: "Meeting Room", d: "A light, airy meeting room for up to 20, with packages from £10 per delegate.", u: "/hospitality/meeting-room/", i: "/assets/images/media-room.jpg", icon: "briefcase" }
+  ] %}
+  <a href="{{ c.u }}" class="group relative isolate flex min-h-80 flex-col justify-end overflow-hidden rounded-3xl p-8">
+    <img src="{{ c.i }}" alt="" class="absolute inset-0 -z-10 h-full w-full object-cover transition duration-700 group-hover:scale-105" sizes="(min-width: 768px) 50vw, 100vw">
+    <div class="absolute inset-0 -z-10 bg-gradient-to-t from-heath-950/90 via-heath-950/40 to-transparent"></div>
+    <span class="flex size-11 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur">{% icon c.icon, "size-5" %}</span>
+    <h2 class="mt-4 font-display text-3xl font-semibold text-white">{{ c.t }}</h2>
+    <p class="mt-2 max-w-md text-white/85">{{ c.d }}</p>
+    <span class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-gorse-400">Find out more {% icon "arrowRight", "size-4 transition-transform group-hover:translate-x-1" %}</span>
+  </a>
+  {%- endfor %}
+</div>
+<div class="mt-10 rounded-2xl bg-crest-50 p-6 ring-1 ring-crest-200 sm:flex sm:items-center sm:justify-between sm:gap-6">
+  <div>
+    <p class="font-display text-xl font-semibold text-heath-900">Speak to Penny, our Catering & Hospitality Manager</p>
+    <p class="mt-1 text-heath-700">01902 341142 (Option 6) · catering@penngolfclub.co.uk</p>
+  </div>
+  <a href="mailto:catering@penngolfclub.co.uk" class="btn-dark mt-4 shrink-0 sm:mt-0">{% icon "mail", "size-4" %} Email Penny</a>
+</div>

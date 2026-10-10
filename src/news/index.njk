@@ -1,0 +1,12 @@
+---
+layout: layouts/page.njk
+title: News
+intro: Results, announcements and stories from around the club.
+hero: /assets/images/penn-3.jpg
+---
+<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+  {%- for post in collections.news %}
+  {% include "partials/news-card.njk" %}
+  {%- endfor %}
+</div>
+<p class="mt-10 flex items-center gap-2 text-sm text-heath-700">{% icon "rss", "size-4 text-crest-500" %} <a href="/news/feed.xml" class="link">Subscribe to the news feed</a></p>

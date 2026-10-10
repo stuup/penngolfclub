@@ -1,0 +1,88 @@
+---
+layout: layouts/page.njk
+title: Prices & Offers
+heading: Membership prices & offers
+intro: Seven-day golf on a classic heathland course for less than £28 a week.
+hero: /assets/images/spencer-11.jpg
+---
+<p class="eyebrow">Adult membership from {{ membership.effectiveFrom }}</p>
+<div class="mt-4 grid gap-4 sm:grid-cols-2">
+  {%- for m in membership.adult %}
+  <div class="card relative flex flex-col p-6 {{ 'ring-2 !ring-gorse-500' if m.featured }}">
+    {%- if m.featured %}<span class="absolute -top-3 left-6 rounded-full bg-gorse-500 px-3 py-0.5 text-xs font-semibold text-heath-950">Full membership</span>{% endif %}
+    <h2 class="font-display text-2xl font-semibold text-heath-900">{{ m.name }}</h2>
+    <p class="mt-2"><span class="font-display text-4xl font-semibold text-heath-900">{{ m.price | money }}</span><span class="text-heath-600"> / year</span></p>
+    <p class="text-sm text-crest-600">That's {{ (m.price / 52) | money2 }} a week or {{ (m.price / 12) | money2 }} a month</p>
+    <p class="mt-4 flex-1 text-heath-700">{{ m.access }}</p>
+  </div>
+  {%- endfor %}
+</div>
+
+<div class="mt-8 grid gap-4 sm:grid-cols-2">
+  <section class="rounded-2xl bg-crest-50 p-6 ring-1 ring-crest-200">
+    <h2 class="font-display text-xl font-semibold text-heath-900">Juniors (6–17)</h2>
+    <ul class="mt-3 space-y-2">
+      {%- for j in membership.juniors %}<li class="flex items-baseline gap-2"><span class="text-heath-800">{{ j.name }}</span><span class="flex-1 border-b border-dotted border-heath-300"></span><span class="font-semibold text-heath-900">{{ j.price | money }}</span></li>{% endfor %}
+    </ul>
+  </section>
+  <section class="rounded-2xl bg-crest-50 p-6 ring-1 ring-crest-200">
+    <h2 class="font-display text-xl font-semibold text-heath-900">Young adults (18–32)</h2>
+    <p class="mt-3 text-heath-800">{{ membership.youngAdults }}</p>
+  </section>
+</div>
+
+<section class="mt-8 rounded-3xl bg-heather-500 p-6 text-white sm:p-8">
+  <h2 class="font-display text-2xl font-semibold">Ladies' two-for-one offer</h2>
+  <p class="mt-2 max-w-2xl text-white/90">{{ membership.ladiesOffer }} The Ladies' section at Penn is as friendly as it is vibrant, with camaraderie few clubs can beat.</p>
+  <a href="/membership/#enquire" class="btn mt-5 bg-white text-heather-500 hover:bg-cream">Find out more</a>
+</section>
+
+{# Membership finder #}
+<section class="card mt-12 p-6 sm:p-8" id="finder" aria-labelledby="finder-h">
+  <h2 id="finder-h" class="font-display text-2xl font-semibold text-heath-900">Which membership suits me?</h2>
+  <form class="mt-5 grid gap-6 sm:grid-cols-2" data-finder>
+    <fieldset>
+      <legend class="field-label">How old are you?</legend>
+      <div class="mt-2 flex flex-wrap gap-2">
+        {%- for a in [["6-10","6–10"],["11-17","11–17"],["18-32","18–32"],["33-74","33–74"],["75+","75+"]] %}
+        <label class="cursor-pointer"><input type="radio" name="age" value="{{ a[0] }}" class="peer sr-only"><span class="block rounded-full px-4 py-2 text-sm ring-1 ring-heath-950/15 peer-checked:bg-heath-900 peer-checked:text-white peer-focus-visible:outline-2 peer-focus-visible:outline-gorse-500">{{ a[1] }}</span></label>
+        {%- endfor %}
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend class="field-label">When do you want to play?</legend>
+      <div class="mt-2 flex flex-wrap gap-2">
+        {%- for w in [["weekdays","Weekdays only"],["sundays","Weekdays + Sunday afternoons"],["any","Any day"]] %}
+        <label class="cursor-pointer"><input type="radio" name="when" value="{{ w[0] }}" class="peer sr-only"><span class="block rounded-full px-4 py-2 text-sm ring-1 ring-heath-950/15 peer-checked:bg-heath-900 peer-checked:text-white peer-focus-visible:outline-2 peer-focus-visible:outline-gorse-500">{{ w[1] }}</span></label>
+        {%- endfor %}
+      </div>
+    </fieldset>
+    <output class="block rounded-xl bg-heath-50 p-5 text-heath-800 sm:col-span-2" aria-live="polite" data-finder-result>Choose your age and when you'd like to play.</output>
+  </form>
+</section>
+<script type="module">
+  const prices = {{ membership | json | safe }};
+  const form = document.querySelector("[data-finder]");
+  const out = document.querySelector("[data-finder-result]");
+  const gbp = (n) => new Intl.NumberFormat("en-GB", { style: "currency", currency: "GBP" }).format(n);
+  const adult = (name) => prices.adult.find((a) => a.name === name);
+  form.addEventListener("change", () => {
+    const age = form.age.value, when = form.when.value;
+    if (!age) return;
+    let html;
+    if (age === "6-10" || age === "11-17") {
+      const j = prices.juniors[age === "6-10" ? 0 : 1];
+      html = `<strong>Junior membership</strong> — just ${gbp(j.price)} a year.`;
+    } else if (age === "18-32") {
+      html = `<strong>Young Adult rate</strong> — we offer a competitive joining rate for 18–32s. Call 01902 341142 or <a class="link" href="/membership/#enquire">send an enquiry</a> for details.`;
+    } else if (!when) {
+      out.textContent = "Now tell us when you'd like to play.";
+      return;
+    } else {
+      const pick = age === "75+" && when === "weekdays" ? adult("Veteran") : when === "weekdays" ? adult("Five Day") : when === "sundays" ? adult("Restricted") : adult("Seven Day");
+      html = `<strong>${pick.name} membership</strong> — ${gbp(pick.price)} a year (${gbp(pick.price / 52)} a week). ${pick.access}`;
+      if (age === "75+" && when !== "weekdays") html += ` <br><span class="text-sm">Happy to play weekdays at set times? Veteran membership is ${gbp(adult("Veteran").price)}.</span>`;
+    }
+    out.innerHTML = html + ` <a class="link ml-1" href="/membership/#enquire">Enquire now →</a>`;
+  });
+</script>

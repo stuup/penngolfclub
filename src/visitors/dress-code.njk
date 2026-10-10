@@ -1,0 +1,44 @@
+---
+layout: layouts/page.njk
+title: Dress Code
+intro: Smart casual in the clubhouse, proper golf attire on the course.
+hero: /assets/images/penn-1.jpg
+---
+<div class="grid gap-6 md:grid-cols-2">
+  <section class="card p-6">
+    <h2 class="font-display text-2xl font-semibold text-heath-900">In the clubhouse</h2>
+    <p class="mt-3 text-heath-800">Members and visitors may wear smart casual clothes (including jeans, trainers and crossover shoes) in the clubhouse at any time.</p>
+    <p class="mt-3 rounded-lg bg-gorse-300/40 px-4 py-3 font-semibold text-heath-900">Shoes worn to play golf must not be worn in the clubhouse.</p>
+    <p class="mt-4 text-sm font-semibold text-heath-800">With the exception of Club Night, the following are not permitted:</p>
+    <ul class="mt-2 space-y-1.5 text-heath-800">
+      {%- for x in ["Ripped or torn jeans", "Collarless T-shirts", "Tracksuits or combat trousers (pockets on legs)", "Waterproof or windproof golf clothing", "Flip flops, or open-toed footwear for men"] %}
+      <li class="flex gap-2">{% icon "close", "size-5 text-red-600" %}<span>{{ x }}</span></li>
+      {%- endfor %}
+    </ul>
+    <p class="mt-4 text-sm text-heath-700">Shorts should be tailored and approaching knee length. Shirts must be tucked in at all times. Extremes of dress are not acceptable. Please be considerate of furniture and remove wet or muddy outerwear.</p>
+    <p class="mt-3 text-sm text-heath-700">For certain presentations and events, collared shirts, jacket and tie are required for men and smart evening wear for ladies. Dress codes for these events will be specified.</p>
+  </section>
+  <section class="card p-6">
+    <h2 class="font-display text-2xl font-semibold text-heath-900">On the course</h2>
+    <p class="mt-3 text-heath-800">Everyone using the course must be correctly dressed for golf, including proper golf shoes. <strong>Men's shirts must be tucked in at all times.</strong></p>
+    <p class="mt-4 text-sm font-semibold text-heath-800">Not permitted on the course at any time:</p>
+    <ul class="mt-2 space-y-1.5 text-heath-800">
+      {%- for x in ["Blue denim clothing", "Collarless T-shirts", "Trainers", "Tracksuits or combat trousers (pockets on legs)", "Trouser legs worn inside socks, unless covered by waterproof trousers", "Combat, football or sports shorts — shorts must be tailored and approaching knee length"] %}
+      <li class="flex gap-2">{% icon "close", "size-5 text-red-600" %}<span>{{ x }}</span></li>
+      {%- endfor %}
+    </ul>
+  </section>
+</div>
+
+<div class="mt-6 grid gap-6 md:grid-cols-2">
+  <section class="rounded-2xl bg-crest-50 p-6 ring-1 ring-crest-200">
+    <h2 class="font-display text-xl font-semibold text-heath-900">Smoking policy</h2>
+    <p class="mt-2 text-heath-800">Penn Golf Club operates a no-smoking policy throughout its buildings, in line with the law. E-cigarettes may not be used anywhere in the building.</p>
+  </section>
+  <section class="rounded-2xl bg-crest-50 p-6 ring-1 ring-crest-200">
+    <h2 class="font-display text-xl font-semibold text-heath-900">Mobile phones & laptops</h2>
+    <p class="mt-2 text-heath-800">All devices must be on silent at all times. Mobiles may be used for messages and internet access, but not for calls. Laptops may be used with prior permission from the club.</p>
+  </section>
+</div>
+
+<p class="mt-8 text-sm text-heath-700">The Board of Directors reserves the right to refuse service to anyone who does not conform to these rules, and may amend the dress rules for the course and clubhouse as circumstances require. — <em>The Board of Directors, Penn Golf Club Limited</em></p>

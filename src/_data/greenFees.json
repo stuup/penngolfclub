@@ -1,0 +1,10 @@
+{
+  "season": "1st April 2026 – 31st October 2026",
+  "holes": 18,
+  "rates": [
+    { "days": "Monday to Friday", "price": 50 },
+    { "days": "Sunday", "price": 55 }
+  ],
+  "notes": "Please contact the Golf Shop to check course availability before you travel.",
+  "countyCards": ["Staffs Union County Card", "Affiliated County Cards (please refer to your county card for details)"]
+}

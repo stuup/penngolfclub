@@ -1,0 +1,25 @@
+---
+layout: layouts/page.njk
+title: The Club
+intro: A friendly, traditional members' club with more than a century of history on Penn Common.
+hero: /assets/images/cluboutside2.jpg
+wide: true
+---
+<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+  {%- for c in [
+    { t: "Our Clubhouse", d: "A characterful clubhouse with the Stowe Room, winners boards, a dining room and a dedicated meeting room.", u: "/the-club/clubhouse/", i: "/assets/images/stowe2.jpg" },
+    { t: "History", d: "From the Barley Mow Inn in the 1890s to Walker Cup glory — the story of golf on Penn Common.", u: "/the-club/history/", i: "/assets/images/bw-golfers.jpg" },
+    { t: "Club Officials", d: "Meet the Captains, President, Board and officers who run the club.", u: "/the-club/officials/", i: "/assets/images/penn-ladies.jpg" },
+    { t: "Our Sponsors", d: "The local businesses whose support helps keep Penn thriving.", u: "/the-club/sponsors/", i: "/assets/images/pgcsponsors2.jpg" },
+    { t: "Safeguarding", d: "Our commitment to a safe environment for children and adults at risk.", u: "/the-club/safeguarding/", i: "/assets/images/junior-golf-2.jpg" },
+    { t: "News", d: "Results, announcements and stories from around the club.", u: "/news/", i: "/assets/images/penn-3.jpg" }
+  ] %}
+  <a href="{{ c.u }}" class="card group overflow-hidden">
+    <img src="{{ c.i }}" alt="" class="aspect-[16/10] w-full object-cover transition duration-500 group-hover:scale-105" sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw">
+    <div class="p-6">
+      <h2 class="font-display text-2xl font-semibold text-heath-900 group-hover:text-crest-600">{{ c.t }}</h2>
+      <p class="mt-2 text-heath-700">{{ c.d }}</p>
+    </div>
+  </a>
+  {%- endfor %}
+</div>

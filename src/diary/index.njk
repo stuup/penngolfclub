@@ -1,0 +1,48 @@
+---
+layout: layouts/page.njk
+title: Diary
+heading: Club diary
+intro: Open competitions, regular fixtures and social events at Penn.
+hero: /assets/images/penn-5.jpg
+---
+{%- set next = events.events | upcoming %}
+{%- set prev = events.events | past %}
+
+<section aria-labelledby="up-h">
+  <div class="flex flex-wrap items-end justify-between gap-4">
+    <h2 id="up-h" class="font-display text-3xl font-semibold text-heath-900">Coming up</h2>
+    <a href="/diary.ics" class="inline-flex items-center gap-2 text-sm font-semibold text-crest-600 hover:text-heath-900">{% icon "calendar", "size-4" %} Add the diary to your calendar</a>
+  </div>
+  {%- if next.length %}
+  <ul class="mt-6 space-y-3">{% for e in next %}<li>{% include "partials/event-row.njk" %}</li>{% endfor %}</ul>
+  {%- else %}
+  <p class="mt-6 rounded-2xl bg-white p-6 text-heath-700 ring-1 ring-heath-950/10">Next season's fixtures will be published here soon. Members can find the full competition calendar on the <a href="{{ site.links.membersHub }}" class="link" rel="noopener">Members' Hub</a>.</p>
+  {%- endif %}
+</section>
+
+<section class="mt-14" aria-labelledby="reg-h">
+  <h2 id="reg-h" class="font-display text-2xl font-semibold text-heath-900">Regular fixtures</h2>
+  <ul class="mt-5 grid gap-4 sm:grid-cols-3">
+    {%- for r in events.regular %}
+    <li class="card p-5">
+      <p class="eyebrow">{{ r.when }}</p>
+      <p class="mt-1 font-semibold text-heath-900">{{ r.title }}</p>
+      <p class="mt-1 text-sm text-heath-700">{{ r.detail }}</p>
+    </li>
+    {%- endfor %}
+  </ul>
+</section>
+
+{%- if prev.length %}
+<section class="mt-14" aria-labelledby="past-h">
+  <h2 id="past-h" class="font-display text-2xl font-semibold text-heath-900">Earlier this season</h2>
+  <ul class="mt-5 divide-y divide-heath-950/10 rounded-2xl bg-white ring-1 ring-heath-950/10">
+    {%- for e in prev %}
+    <li class="flex flex-wrap items-center justify-between gap-3 px-5 py-4">
+      <span><span class="font-semibold text-heath-900">{{ e.title }}</span> <span class="text-sm text-heath-600">· {{ e.date | dateLong }}</span></span>
+      {%- if e.results %}<a href="{{ e.results }}" class="text-sm font-semibold text-crest-600 hover:text-heath-900">Results (PDF)</a>{% endif %}
+    </li>
+    {%- endfor %}
+  </ul>
+</section>
+{%- endif %}

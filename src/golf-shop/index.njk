@@ -1,0 +1,25 @@
+---
+layout: layouts/page.njk
+title: The Golf Shop
+intro: A well-stocked pro shop with helpful, professional staff — run by Steve Carter Golf.
+hero: /assets/images/hickory-golf-clubs-2.jpg
+---
+<div class="grid gap-6 md:grid-cols-2">
+  <a href="{{ site.links.golfShop }}" class="card group flex flex-col p-6" rel="noopener">
+    <span class="flex size-12 items-center justify-center rounded-xl bg-crest-100 text-crest-600">{% icon "bag", "size-6" %}</span>
+    <h2 class="mt-4 font-display text-2xl font-semibold text-heath-900 group-hover:text-crest-600">Shop online</h2>
+    <p class="mt-2 flex-1 text-heath-700">Browse equipment, clothing and accessories from the Penn GC golf shop.</p>
+    <span class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-crest-600">Visit Steve Carter Golf {% icon "external", "size-4" %}</span>
+  </a>
+  <div class="card flex flex-col p-6">
+    <span class="flex size-12 items-center justify-center rounded-xl bg-crest-100 text-crest-600">{% icon "phone", "size-6" %}</span>
+    <h2 class="mt-4 font-display text-2xl font-semibold text-heath-900">Talk to the shop</h2>
+    <p class="mt-2 flex-1 text-heath-700">For tee times, green fees, society bookings, lessons and club fitting, contact the shop directly.</p>
+    <a href="tel:+441902330472" class="mt-4 font-display text-2xl font-semibold text-heath-900 hover:text-crest-600">01902 330472</a>
+  </div>
+</div>
+<div class="mt-8 grid gap-4 sm:grid-cols-3">
+  <a href="/golf-shop/coaching/" class="card flex items-center gap-3 p-4 font-semibold text-heath-900 hover:text-crest-600">{% icon "graduation", "size-5 text-crest-500" %} Coaching & club fitting</a>
+  <a href="{{ site.links.bookTeeTime }}" class="card flex items-center gap-3 p-4 font-semibold text-heath-900 hover:text-crest-600" rel="noopener">{% icon "flag", "size-5 text-crest-500" %} Book a tee time</a>
+  <a href="/the-course/status/" class="card flex items-center gap-3 p-4 font-semibold text-heath-900 hover:text-crest-600">{% icon "sun", "size-5 text-crest-500" %} Course status</a>
+</div>

@@ -1,0 +1,15 @@
+---
+layout: layouts/base.njk
+title: Thank you
+permalink: /thanks/
+eleventyExcludeFromCollections: true
+---
+<section class="container-site flex min-h-[60vh] flex-col items-center justify-center py-24 text-center">
+  <span class="flex size-16 items-center justify-center rounded-full bg-emerald-100 text-emerald-700">{% icon "check", "size-8" %}</span>
+  <h1 class="mt-6 text-4xl font-semibold text-heath-900 sm:text-5xl">Thank you</h1>
+  <p class="mt-4 max-w-lg text-lg text-heath-700">We've received your message and will be in touch soon. If it's urgent, please call us on <a href="{{ site.phone | telHref }}" class="link">{{ site.phone }}</a>.</p>
+  <div class="mt-8 flex flex-wrap justify-center gap-3">
+    <a href="/" class="btn-dark">Back to the homepage</a>
+    <a href="/the-course/scorecard/" class="btn-outline">View the scorecard</a>
+  </div>
+</section>

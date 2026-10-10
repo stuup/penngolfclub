@@ -1,0 +1,15 @@
+{
+  "effectiveFrom": "1st April 2026",
+  "adult": [
+    { "name": "Seven Day", "price": 1452, "access": "Unrestricted play, seven days a week.", "featured": true },
+    { "name": "Restricted", "price": 1162, "access": "Monday to Friday at any time, plus Sundays after 11.30am." },
+    { "name": "Five Day", "price": 1089, "access": "Monday to Friday at any time." },
+    { "name": "Veteran", "price": 726, "access": "Aged 75 and over. Monday to Friday, teeing off 10.00am–12 noon and 2.00pm–3.30pm." }
+  ],
+  "juniors": [
+    { "name": "Juniors aged 6–10", "price": 15 },
+    { "name": "Juniors aged 11–17", "price": 109 }
+  ],
+  "youngAdults": "Penn Golf Club is keen to encourage its younger membership and offers a competitive joining rate for golfers aged 18–32. Please call the office on 01902 341142 for details.",
+  "ladiesOffer": "Calling all ladies! You and a friend or family member can take advantage of our two-for-one offer. Tuesday is Ladies' Day at Penn — why not come and meet us for a coffee and find out more?"
+}

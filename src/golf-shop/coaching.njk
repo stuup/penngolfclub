@@ -1,0 +1,23 @@
+---
+layout: layouts/page.njk
+title: Coaching & Club Fitting
+heading: Golf coaching & club fitting
+intro: Lessons for every level and custom club fitting from the team at the Golf Shop.
+hero: /assets/images/junior-golf-2.jpg
+---
+<div class="prose-club">
+  <p>Whether you're picking up a club for the first time, getting back into the game or chasing a lower handicap, our professional team can help. Lessons and custom club fitting are available through the Golf Shop.</p>
+</div>
+<div class="mt-8 grid gap-4 sm:grid-cols-3">
+  {%- for c in [{ i: "graduation", t: "Lessons", d: "Individual and group coaching for all abilities." }, { i: "target", t: "Club fitting", d: "Get the right specification for your swing." }, { i: "users", t: "Juniors & beginners", d: "Start your golf journey at a welcoming club." }] %}
+  <div class="card p-5">
+    <span class="flex size-11 items-center justify-center rounded-xl bg-crest-100 text-crest-600">{% icon c.i, "size-5" %}</span>
+    <p class="mt-3 font-semibold text-heath-900">{{ c.t }}</p>
+    <p class="text-sm text-heath-700">{{ c.d }}</p>
+  </div>
+  {%- endfor %}
+</div>
+<div class="mt-8 flex flex-wrap gap-3">
+  <a href="{{ site.links.golfShop }}" class="btn-dark" rel="noopener">Find out more {% icon "external", "size-4" %}</a>
+  <a href="tel:+441902330472" class="btn-outline">{% icon "phone", "size-4" %} 01902 330472</a>
+</div>

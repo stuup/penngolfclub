@@ -1,0 +1,22 @@
+---
+layout: layouts/page.njk
+title: Open Results
+intro: We hope all our competitors enjoyed their day with us, and look forward to seeing you again soon.
+hero: /assets/images/spencer-22.jpg
+---
+{%- set prev = events.events | past %}
+<ul class="space-y-3">
+  {%- for e in prev %}{% if e.results %}
+  <li>
+    <a href="{{ e.results }}" class="card group flex items-center gap-4 p-5" download>
+      <span class="flex size-12 shrink-0 items-center justify-center rounded-xl bg-gorse-300/60 text-heath-900">{% icon "trophy", "size-6" %}</span>
+      <span class="flex-1">
+        <span class="block font-semibold text-heath-900 group-hover:text-crest-600">{{ e.title }}</span>
+        <span class="text-sm text-heath-600">{{ e.date | dateLong }} · {{ e.format }}</span>
+      </span>
+      <span class="hidden items-center gap-1.5 text-sm font-semibold text-crest-600 sm:inline-flex">PDF {% icon "download", "size-4" %}</span>
+    </a>
+  </li>
+  {%- endif %}{% endfor %}
+</ul>
+<p class="mt-8 text-heath-700">Competition results for members are also published on <a href="{{ site.links.howDidiDo }}" class="link" rel="noopener">HowDidiDo</a> and the <a href="{{ site.links.membersHub }}" class="link" rel="noopener">Members' Hub</a>.</p>

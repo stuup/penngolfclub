@@ -1,0 +1,42 @@
+---
+layout: layouts/page.njk
+title: Weddings
+intro: A stunning view over open countryside makes Penn the perfect venue for weddings, wedding breakfasts and parties.
+hero: /assets/images/beckie-7.jpg
+---
+<div class="prose-club">
+  <p>Browse our gallery for ideas on how your perfect day could look in our large dining and function suite, complete with a parquet dance floor.</p>
+  <p>Our friendly and experienced Catering Manager, Penny, will put together a mouth-watering menu for you, whatever the size or style of your celebration. <strong>We will not be beaten on price and quality.</strong></p>
+</div>
+
+<section class="card mt-10 p-6 sm:p-8">
+  <h2 class="font-display text-2xl font-semibold text-heath-900">What we can offer</h2>
+  <ul class="mt-5 grid gap-3 sm:grid-cols-2">
+    {%- for x in hospitality.weddingInclusions %}<li class="flex gap-3 text-heath-800">{% icon "check", "size-5 text-crest-500 mt-0.5" %}<span>{{ x }}</span></li>{% endfor %}
+  </ul>
+</section>
+
+<div class="mt-10">
+{%- set gallery = [
+  { src: "/assets/images/beckie-7.jpg", alt: "Wedding top table with illuminated Mr & Mrs letters" },
+  { src: "/assets/images/penn-clubhouse-2.jpg", alt: "Round tables dressed with white linen and chair covers" },
+  { src: "/assets/images/penn-clubhouse-1.jpg", alt: "The function suite laid for a wedding breakfast" },
+  { src: "/assets/images/food-9.jpg", alt: "Dessert course" }
+] %}
+{% include "partials/gallery.njk" %}
+</div>
+
+<div class="mt-14">
+{%- set form = {
+  name: "wedding-enquiry",
+  title: "Start planning your day",
+  intro: "Tell us a little about your plans and Penny will be in touch to arrange a visit.",
+  submit: "Send wedding enquiry",
+  extra: [
+    { name: "date", label: "Preferred date", type: "date" },
+    { name: "guests", label: "Approximate number of guests", type: "number" },
+    { name: "message", label: "Tell us about your plans", type: "textarea" }
+  ]
+} %}
+{% include "partials/enquiry-form.njk" %}
+</div>

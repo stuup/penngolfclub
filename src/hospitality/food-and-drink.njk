@@ -1,0 +1,30 @@
+---
+layout: layouts/page.njk
+title: Food & Drink
+intro: Come and try our superb menu — home-cooked food served all day, every day.
+hero: /assets/images/beckie-3.jpg
+---
+<div class="prose-club">
+  <p>At Penn Golf Club we know that enjoying our fine course is only part of your day. Before or after your round you can expect a warm and friendly welcome from our team.</p>
+  <p>We offer an extensive menu of top-quality home-cooked food at very reasonable prices. If the daily specials aren't tempting enough, our <strong>themed nights</strong> are great value and bring a real buzz to the clubhouse.</p>
+  <p>We specialise in <strong>traditional ales</strong> and always have something special on tap.</p>
+  <p>Whether you're visiting for a special occasion, as a small group or with a large society, we'll look after you. Food is available all day, every day: have breakfast before your golf, a light snack or full meal afterwards, or both! No request is too much trouble.</p>
+  <p>We host regular social events throughout the year. Keep an eye on the <a href="/diary/">diary</a> and <a href="/news/">news</a> for what's coming up.</p>
+</div>
+<div class="mt-10">
+{%- set gallery = [
+  { src: "/assets/images/beckie-17.jpg", alt: "A stacked burger with onion rings, served at the bar" },
+  { src: "/assets/images/beckie-3.jpg", alt: "Buffet platters of sandwiches and savouries" },
+  { src: "/assets/images/beckie-5.jpg", alt: "Fresh berry and cream desserts" },
+  { src: "/assets/images/beckie-2-b.jpg", alt: "A finger buffet laid out for a function" },
+  { src: "/assets/images/food-9.jpg", alt: "Strawberry sponge roll dessert" }
+] %}
+{% include "partials/gallery.njk" %}
+</div>
+<div class="mt-10 rounded-2xl bg-crest-50 p-6 ring-1 ring-crest-200 sm:flex sm:items-center sm:justify-between sm:gap-6">
+  <div>
+    <p class="font-display text-xl font-semibold text-heath-900">Booking a table or a party?</p>
+    <p class="mt-1 text-heath-700">Call Penny on 01902 341142 (Option 6) or email catering@penngolfclub.co.uk.</p>
+  </div>
+  <a href="tel:+441902341142" class="btn-dark mt-4 shrink-0 sm:mt-0">{% icon "phone", "size-4" %} Call the clubhouse</a>
+</div>

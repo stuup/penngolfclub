@@ -1,0 +1,32 @@
+---
+layout: layouts/page.njk
+title: Our Clubhouse
+intro: A traditional clubhouse packed with character and nods to the club's rich history.
+hero: /assets/images/lounge-1.jpg
+---
+<div class="prose-club">
+  <p>After your round, take time to relax in our refurbished clubhouse. Penn Golf Club boasts a traditional clubhouse packed with character: the rich history, the Ball of Fame, the Stowe Room and our meeting and function rooms.</p>
+  <p>The intimate <strong>Stowe Room</strong> holds most of the club's much-envied winners boards and memorabilia of the great Charlie Stowe, the Black Country miner who became a Walker Cup winner.</p>
+  <p>We also have a separate <a href="/hospitality/meeting-room/">Media Room</a>, ideal for business meetings or presentations, and a large dining room. Both can be hired independently or configured with the other rooms for any business or social occasion, from small meetings to large parties.</p>
+</div>
+
+<div class="mt-10">
+{%- set gallery = [
+  { src: "/assets/images/stowe2.jpg", alt: "The Stowe Room, with winners boards and a portrait of Charlie Stowe" },
+  { src: "/assets/images/lounge-1.jpg", alt: "The bar and lounge" },
+  { src: "/assets/images/cluboutside2.jpg", alt: "The clubhouse terrace" },
+  { src: "/assets/images/penn-clubhouse-1.jpg", alt: "The dining room set for a function" },
+  { src: "/assets/images/media-room.jpg", alt: "The Media Room set up for a meeting" }
+] %}
+{% include "partials/gallery.njk" %}
+</div>
+
+<div class="mt-10 grid gap-4 sm:grid-cols-3">
+  {%- for l in [
+    { t: "Food & Drink", u: "/hospitality/food-and-drink/", i: "utensils" },
+    { t: "Functions & weddings", u: "/hospitality/weddings/", i: "heart" },
+    { t: "Meeting room hire", u: "/hospitality/meeting-room/", i: "briefcase" }
+  ] %}
+  <a href="{{ l.u }}" class="card flex items-center gap-3 p-4 font-semibold text-heath-900 hover:text-crest-600">{% icon l.i, "size-5 text-crest-500" %} {{ l.t }}</a>
+  {%- endfor %}
+</div>

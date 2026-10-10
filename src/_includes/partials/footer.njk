@@ -1,0 +1,79 @@
+<footer role="contentinfo" class="mt-24 bg-heath-950 text-white/75">
+  {# Newsletter #}
+  <div class="border-b border-white/10">
+    <div class="container-site grid gap-8 py-12 lg:grid-cols-2 lg:items-center">
+      <div>
+        <h2 class="font-display text-2xl font-semibold text-white sm:text-3xl">Stay in the swing</h2>
+        <p class="mt-2 max-w-md">Open competition dates, society offers, themed food nights and club news — straight to your inbox, a few times a season.</p>
+      </div>
+      <form name="newsletter" method="POST" action="/thanks/" data-netlify="true" netlify-honeypot="company" class="flex w-full flex-col gap-3 sm:flex-row">
+        <input type="hidden" name="form-name" value="newsletter">
+        <p class="hidden"><label>Leave this empty <input name="company"></label></p>
+        <label for="nl-email" class="sr-only">Email address</label>
+        <input id="nl-email" type="email" name="email" required autocomplete="email" placeholder="you@example.com" class="field flex-1 bg-white/10 text-white ring-white/20 placeholder:text-white/40">
+        <button type="submit" class="btn-primary shrink-0">Subscribe</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="container-site grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-12">
+    <div class="lg:col-span-4">
+      <a href="/" class="flex items-center gap-4">
+        <img src="/assets/brand/penn-golf-club-crest-white.svg" alt="" width="72" height="72" class="size-[72px]" eleventy:ignore>
+        <span class="font-display text-2xl font-semibold text-white">Penn Golf Club</span>
+      </a>
+      <p class="mt-5 max-w-xs text-sm leading-relaxed">One of the hidden gems of the Midlands — a mature heathland course on Penn Common, where city meets countryside.</p>
+      {%- if site.social.length %}
+      <ul class="mt-5 flex gap-3">
+        {%- for s in site.social %}<li><a href="{{ s.url }}" class="link text-white" rel="noopener">{{ s.name }}</a></li>{% endfor %}
+      </ul>
+      {%- endif %}
+    </div>
+
+    <div class="lg:col-span-3">
+      <h2 class="text-sm font-semibold tracking-wider text-white uppercase">Find us</h2>
+      <address class="mt-4 space-y-3 text-sm not-italic">
+        <p class="flex gap-3">{% icon "pin", "size-5 text-crest-300" %}<span>Penn Common, Penn<br>Wolverhampton<br>{{ site.address.postcode }}</span></p>
+        <p><a href="{{ site.phone | telHref }}" class="flex gap-3 hover:text-white">{% icon "phone", "size-5 text-crest-300" %}{{ site.phone }}</a></p>
+        <p><a href="mailto:{{ site.email }}" class="flex gap-3 hover:text-white">{% icon "mail", "size-5 text-crest-300" %}{{ site.email }}</a></p>
+      </address>
+      <a href="{{ site.links.directions }}" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-gorse-400 hover:text-gorse-300" rel="noopener">Get directions {% icon "arrowRight", "size-4" %}</a>
+    </div>
+
+    <div class="lg:col-span-2">
+      <h2 class="text-sm font-semibold tracking-wider text-white uppercase">Golf</h2>
+      <ul class="mt-4 space-y-2 text-sm">
+        <li><a class="hover:text-white" href="{{ site.links.bookTeeTime }}" rel="noopener">Book a tee time</a></li>
+        <li><a class="hover:text-white" href="/visitors/">Green fees</a></li>
+        <li><a class="hover:text-white" href="/visitors/societies/">Societies</a></li>
+        <li><a class="hover:text-white" href="/visitors/open-competitions/">Open competitions</a></li>
+        <li><a class="hover:text-white" href="/the-course/scorecard/">Scorecard</a></li>
+        <li><a class="hover:text-white" href="/the-course/course-handicap/">Course handicap</a></li>
+      </ul>
+    </div>
+
+    <div class="lg:col-span-3">
+      <h2 class="text-sm font-semibold tracking-wider text-white uppercase">Club</h2>
+      <ul class="mt-4 space-y-2 text-sm">
+        <li><a class="hover:text-white" href="/membership/">Become a member</a></li>
+        <li><a class="hover:text-white" href="/hospitality/">Weddings & functions</a></li>
+        <li><a class="hover:text-white" href="/diary/">Diary</a></li>
+        <li><a class="hover:text-white" href="/news/">News</a></li>
+        <li><a class="hover:text-white" href="{{ site.links.membersHub }}" rel="noopener">Members' Hub</a></li>
+        <li><a class="hover:text-white" href="/contact/">Contact us</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-white/10">
+    <div class="container-site flex flex-col gap-3 py-6 text-xs text-white/50 sm:flex-row sm:items-center sm:justify-between">
+      <p>&copy; {% year %} Penn Golf Club Limited. All rights reserved.</p>
+      <ul class="flex flex-wrap gap-x-5 gap-y-2">
+        <li><a class="hover:text-white" href="/privacy/">Privacy &amp; cookies</a></li>
+        <li><a class="hover:text-white" href="/the-club/safeguarding/">Safeguarding</a></li>
+        <li><a class="hover:text-white" href="/accessibility/">Accessibility</a></li>
+        <li><a class="hover:text-white" href="/sitemap.xml">Sitemap</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
