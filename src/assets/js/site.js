@@ -64,6 +64,7 @@ document.addEventListener("keydown", (e) => {
 // ---------------------------------------------------------------------------
 // Feature modules, loaded only where needed
 // ---------------------------------------------------------------------------
+if (document.querySelector("[data-course-status]")) import("./night.js");
 if (document.querySelector("[data-weather]")) import("./weather.js");
 if (document.querySelector("[data-scorecard]")) import("./scorecard.js");
 if (document.querySelector("[data-handicap]")) import("./handicap.js");

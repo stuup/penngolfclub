@@ -8,14 +8,15 @@ hero: /assets/images/penn-3.jpg
 {%- set s = courseStatus %}
 {%- set tone = "emerald" if s.status == "open" else ("amber" if s.status == "restricted" else "red") %}
 <div class="grid gap-6 lg:grid-cols-2">
-  <section class="card p-6" aria-labelledby="status-h">
+  <section data-course-status="{{ s.status }}" class="card p-6" aria-labelledby="status-h">
     <div class="flex items-center gap-3">
-      <span class="flex size-12 items-center justify-center rounded-full {{ 'bg-emerald-100 text-emerald-700' if tone == 'emerald' else ('bg-amber-100 text-amber-700' if tone == 'amber' else 'bg-red-100 text-red-700') }}">{% icon "flag", "size-6" %}</span>
+      <span data-status-icon class="flex size-12 items-center justify-center rounded-full {{ 'bg-emerald-100 text-emerald-700' if tone == 'emerald' else ('bg-amber-100 text-amber-700' if tone == 'amber' else 'bg-red-100 text-red-700') }}">{% icon "flag", "size-6" %}</span>
       <div>
-        <h2 id="status-h" class="font-display text-2xl font-semibold text-heath-900">{{ s.headline }}</h2>
+        <h2 id="status-h" data-status-headline class="font-display text-2xl font-semibold text-heath-900">{{ s.headline }}</h2>
         <p class="text-sm text-heath-600">Updated <time datetime="{{ s.updated }}" data-relative>{{ s.updated | dateLong }}</time></p>
       </div>
     </div>
+    <p data-status-night hidden class="mt-5 rounded-lg bg-heath-50 px-4 py-3 text-heath-800"></p>
     <p class="mt-5 text-heath-800">{{ s.message }}</p>
     <p class="mt-4 inline-flex items-center gap-2 rounded-full bg-heath-50 px-3 py-1.5 text-sm text-heath-800">
       <span class="size-2.5 rounded-full {{ 'bg-emerald-500' if s.buggies == 'green' else ('bg-amber-500' if s.buggies == 'amber' else 'bg-red-500') }}"></span>

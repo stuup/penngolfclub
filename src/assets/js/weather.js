@@ -18,10 +18,13 @@ const ICONS = {
   drizzle: '<path fill="#dceaeb" stroke="#548488" d="M17.5 14H9a5.5 5.5 0 1 1 5.2-7h1.3a3.5 3.5 0 1 1 2 7z"/><path stroke="#446b6f" d="M9 18v1M13 18v1M17 18v1"/>',
   rain: '<path fill="#dceaeb" stroke="#548488" d="M17.5 14H9a5.5 5.5 0 1 1 5.2-7h1.3a3.5 3.5 0 1 1 2 7z"/><path stroke="#446b6f" d="M8 17l-1 3M12 17l-1 3M16 17l-1 3"/>',
   snow: '<path fill="#fff" stroke="#548488" d="M17.5 14H9a5.5 5.5 0 1 1 5.2-7h1.3a3.5 3.5 0 1 1 2 7z"/><path stroke="#446b6f" d="M8 18h.01M12 20h.01M16 18h.01"/>',
+  moon: '<path fill="#dceaeb" stroke="#548488" d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>',
+  moonCloud: '<path fill="#dceaeb" stroke="#548488" transform="translate(1.5 1) scale(.6)" vector-effect="non-scaling-stroke" d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/><path fill="#fff" stroke="#548488" d="M17.5 20H9a5 5 0 1 1 4.8-6.5h.7a3.25 3.25 0 1 1 3 6.5z"/>',
   storm: '<path fill="#bcd7d9" stroke="#446b6f" d="M17.5 14H9a5.5 5.5 0 1 1 5.2-7h1.3a3.5 3.5 0 1 1 2 7z"/><path fill="#ecc451" stroke="#c8921f" d="m13 14-3 4h3l-2 4"/>',
 };
 const icon = (key, cls = "size-10") =>
   `<svg class="${cls}" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[key] || ICONS.cloud}</svg>`;
+const NIGHT = { sun: "moon", partly: "moonCloud" };
 const COLS = { 3: "grid-cols-3", 4: "grid-cols-4", 5: "grid-cols-5" };
 const compass = (deg) => ["N", "NE", "E", "SE", "S", "SW", "W", "NW"][Math.round(deg / 45) % 8];
 const time = (iso) => iso.slice(11, 16);
@@ -41,16 +44,23 @@ async function render(el) {
   const days = Number(el.dataset.days || 5);
   const url =
     `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}` +
-    `&current=temperature_2m,apparent_temperature,weather_code,wind_speed_10m,wind_direction_10m,wind_gusts_10m` +
+    `&current=temperature_2m,apparent_temperature,weather_code,is_day,wind_speed_10m,wind_direction_10m,wind_gusts_10m` +
     `&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,wind_speed_10m_max,sunrise,sunset` +
-    `&timezone=Europe%2FLondon&wind_speed_unit=mph&forecast_days=${days}`;
+    `&timezone=Europe%2FLondon&wind_speed_unit=mph&forecast_days=${days + 1}`;
   try {
     const res = await fetch(url);
     if (!res.ok) throw new Error(res.status);
     const w = await res.json();
     const c = w.current, d = w.daily;
-    const [label, key] = WMO[c.weather_code] || ["—", "cloud"];
-    const [say, sayCls] = verdict(c.weather_code, d.precipitation_probability_max[0], c.wind_speed_10m);
+    // After sunset today is over: the verdict, rain chance and forecast move on to tomorrow.
+    // (Both times are local "YYYY-MM-DDTHH:MM" strings, so they compare as text.)
+    const o = c.time >= d.sunset[0] ? 1 : 0;
+    const [label, dayKey] = WMO[c.weather_code] || ["—", "cloud"];
+    const key = c.is_day ? dayKey : NIGHT[dayKey] || dayKey;
+    let [say, sayCls] = o
+      ? verdict(d.weather_code[1], d.precipitation_probability_max[1], d.wind_speed_10m_max[1])
+      : verdict(c.weather_code, d.precipitation_probability_max[0], c.wind_speed_10m);
+    if (o) say = `Tomorrow: ${say}`;
     const compact = el.dataset.compact !== undefined;
 
     const now = `
@@ -63,8 +73,8 @@ async function render(el) {
       </div>
       <dl class="mt-4 grid grid-cols-3 gap-2 text-center text-xs text-heath-700">
         <div class="rounded-lg bg-heath-50 p-2"><dt>Wind</dt><dd class="mt-0.5 text-sm font-semibold text-heath-900">${Math.round(c.wind_speed_10m)} mph ${compass(c.wind_direction_10m)}</dd></div>
-        <div class="rounded-lg bg-heath-50 p-2"><dt>Rain chance</dt><dd class="mt-0.5 text-sm font-semibold text-heath-900">${d.precipitation_probability_max[0]}%</dd></div>
-        <div class="rounded-lg bg-heath-50 p-2"><dt>Sunset</dt><dd class="mt-0.5 text-sm font-semibold text-heath-900">${time(d.sunset[0])}</dd></div>
+        <div class="rounded-lg bg-heath-50 p-2"><dt>${o ? "Rain tomorrow" : "Rain chance"}</dt><dd class="mt-0.5 text-sm font-semibold text-heath-900">${d.precipitation_probability_max[o]}%</dd></div>
+        <div class="rounded-lg bg-heath-50 p-2"><dt>${o ? "Sunrise" : "Sunset"}</dt><dd class="mt-0.5 text-sm font-semibold text-heath-900">${time(o ? d.sunrise[1] : d.sunset[0])}</dd></div>
       </dl>
       <p class="mt-3 text-sm font-medium ${sayCls}">${say}</p>`;
 
@@ -73,7 +83,7 @@ async function render(el) {
       : `<ol class="mt-6 grid ${COLS[Math.min(days, 5)]} gap-2 border-t border-heath-950/10 pt-5 text-center">
           ${d.time
             .map(
-              (t, i) => `<li class="rounded-xl p-2 ${i === 0 ? "bg-crest-50" : ""}">
+              (t, i) => i < o || i >= o + days ? "" : `<li class="rounded-xl p-2 ${i === o ? "bg-crest-50" : ""}">
                 <p class="text-xs font-semibold text-heath-800">${day(t, i)}</p>
                 <div class="my-1 flex justify-center">${icon((WMO[d.weather_code[i]] || [])[1], "size-9")}</div>
                 <p class="text-sm"><span class="font-semibold text-heath-900">${Math.round(d.temperature_2m_max[i])}°</span> <span class="text-heath-500">${Math.round(d.temperature_2m_min[i])}°</span></p>
@@ -83,7 +93,7 @@ async function render(el) {
             .join("")}
         </ol>
         <p class="mt-4 flex flex-wrap gap-x-5 gap-y-1 text-xs text-heath-600">
-          <span>Sunrise ${time(d.sunrise[0])}</span><span>Sunset ${time(d.sunset[0])}</span><span>Gusts to ${Math.round(c.wind_gusts_10m)} mph</span>
+          <span>Sunrise ${time(d.sunrise[o])}</span><span>Sunset ${time(d.sunset[o])}</span><span>Gusts to ${Math.round(c.wind_gusts_10m)} mph</span>
         </p>`;
 
     el.innerHTML = now + forecast + `<p class="mt-3 text-[11px] text-heath-500">Forecast by <a class="underline" href="https://open-meteo.com/" rel="noopener">Open-Meteo</a></p>`;

@@ -25,13 +25,13 @@ description: Penn Golf Club — a traditional heathland course on Penn Common, W
     </div>
 
     {# Conditions card #}
-    <aside class="card animate-fade-up p-6 [animation-delay:320ms]" aria-labelledby="conditions-title">
+    <aside data-course-status="{{ courseStatus.status }}" class="card animate-fade-up p-6 [animation-delay:320ms]" aria-labelledby="conditions-title">
       <div class="flex items-start justify-between gap-4">
         <div>
           <p id="conditions-title" class="eyebrow">Today at Penn</p>
-          <p class="mt-1 font-display text-xl font-semibold text-heath-900">{{ courseStatus.headline }}</p>
+          <p data-status-headline class="mt-1 font-display text-xl font-semibold text-heath-900">{{ courseStatus.headline }}</p>
         </div>
-        <span class="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold {{ 'bg-emerald-100 text-emerald-800' if courseStatus.status == 'open' else ('bg-amber-100 text-amber-800' if courseStatus.status == 'restricted' else 'bg-red-100 text-red-800') }}">
+        <span data-status-badge class="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold {{ 'bg-emerald-100 text-emerald-800' if courseStatus.status == 'open' else ('bg-amber-100 text-amber-800' if courseStatus.status == 'restricted' else 'bg-red-100 text-red-800') }}">
           <span class="size-1.5 rounded-full bg-current"></span>{{ courseStatus.status | capitalize }}
         </span>
       </div>

@@ -55,7 +55,7 @@
   </script>
   {%- block head %}{% endblock %}
 </head>
-<body class="flex min-h-screen flex-col">
+<body class="flex min-h-screen flex-col" data-lat="{{ site.geo.lat }}" data-lng="{{ site.geo.lng }}">
   <a href="#main" class="sr-only z-[100] rounded-md bg-gorse-500 px-4 py-2 font-semibold text-heath-950 focus:not-sr-only focus:fixed focus:top-3 focus:left-3">Skip to content</a>
 
   {% include "partials/header.njk" %}
